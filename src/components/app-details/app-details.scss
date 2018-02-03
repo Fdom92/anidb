@@ -1,0 +1,23 @@
+app-details {
+  ion-toolbar {
+    .toolbar-background {
+      background-color: #eaa000;
+    }
+
+    .toolbar-content {
+      ion-title {
+        .toolbar-title {
+          color: white;
+        }
+      }
+    }
+  }
+
+  ion-content {
+    ion-card {
+      strong {
+        padding-right: 5px;
+      }
+    }
+  }
+}
