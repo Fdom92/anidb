@@ -12,12 +12,51 @@ import {
   MatchResults,
 } from '@stencil/router';
 
+declare global {
+  interface HTMLStencilElement extends HTMLElement {
+    componentOnReady(): Promise<this>;
+    componentOnReady(done: (ele?: this) => void): void;
+  }
+}
+
+
+
+import {
+  AnimeDetails as AnimeDetails
+} from './components/app-details/anime-details/anime-details';
+
+declare global {
+  interface HTMLAnimeDetailsElement extends AnimeDetails, HTMLStencilElement {
+  }
+  var HTMLAnimeDetailsElement: {
+    prototype: HTMLAnimeDetailsElement;
+    new (): HTMLAnimeDetailsElement;
+  };
+  interface HTMLElementTagNameMap {
+    "anime-details": HTMLAnimeDetailsElement;
+  }
+  interface ElementTagNameMap {
+    "anime-details": HTMLAnimeDetailsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "anime-details": JSXElements.AnimeDetailsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AnimeDetailsAttributes extends HTMLAttributes {
+      anime?: any;
+    }
+  }
+}
+
+
 import {
   AppDetails as AppDetails
 } from './components/app-details/app-details';
 
 declare global {
-  interface HTMLAppDetailsElement extends AppDetails, HTMLElement {
+  interface HTMLAppDetailsElement extends AppDetails, HTMLStencilElement {
   }
   var HTMLAppDetailsElement: {
     prototype: HTMLAppDetailsElement;
@@ -41,3 +80,157 @@ declare global {
   }
 }
 
+
+import {
+  AnimeItem as AnimeItem
+} from './components/app-home/anime-item/anime-item';
+
+declare global {
+  interface HTMLAnimeItemElement extends AnimeItem, HTMLStencilElement {
+  }
+  var HTMLAnimeItemElement: {
+    prototype: HTMLAnimeItemElement;
+    new (): HTMLAnimeItemElement;
+  };
+  interface HTMLElementTagNameMap {
+    "anime-item": HTMLAnimeItemElement;
+  }
+  interface ElementTagNameMap {
+    "anime-item": HTMLAnimeItemElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "anime-item": JSXElements.AnimeItemAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AnimeItemAttributes extends HTMLAttributes {
+      anime?: any;
+    }
+  }
+}
+
+
+import {
+  AppHome as AppHome
+} from './components/app-home/app-home';
+
+declare global {
+  interface HTMLAppHomeElement extends AppHome, HTMLStencilElement {
+  }
+  var HTMLAppHomeElement: {
+    prototype: HTMLAppHomeElement;
+    new (): HTMLAppHomeElement;
+  };
+  interface HTMLElementTagNameMap {
+    "app-home": HTMLAppHomeElement;
+  }
+  interface ElementTagNameMap {
+    "app-home": HTMLAppHomeElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "app-home": JSXElements.AppHomeAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AppHomeAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+
+import {
+  LazyIframe as LazyIframe
+} from './components/lazy-iframe/lazy-iframe';
+
+declare global {
+  interface HTMLLazyIframeElement extends LazyIframe, HTMLStencilElement {
+  }
+  var HTMLLazyIframeElement: {
+    prototype: HTMLLazyIframeElement;
+    new (): HTMLLazyIframeElement;
+  };
+  interface HTMLElementTagNameMap {
+    "lazy-iframe": HTMLLazyIframeElement;
+  }
+  interface ElementTagNameMap {
+    "lazy-iframe": HTMLLazyIframeElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "lazy-iframe": JSXElements.LazyIframeAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface LazyIframeAttributes extends HTMLAttributes {
+      src?: string;
+      title?: string;
+    }
+  }
+}
+
+
+import {
+  LazyImg as LazyImg
+} from './components/lazy-img/lazy-img';
+
+declare global {
+  interface HTMLLazyImgElement extends LazyImg, HTMLStencilElement {
+  }
+  var HTMLLazyImgElement: {
+    prototype: HTMLLazyImgElement;
+    new (): HTMLLazyImgElement;
+  };
+  interface HTMLElementTagNameMap {
+    "lazy-img": HTMLLazyImgElement;
+  }
+  interface ElementTagNameMap {
+    "lazy-img": HTMLLazyImgElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "lazy-img": JSXElements.LazyImgAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface LazyImgAttributes extends HTMLAttributes {
+      alt?: string;
+      avatar?: boolean;
+      src?: string;
+    }
+  }
+}
+
+
+import {
+  MyApp as MyApp
+} from './components/my-app/my-app';
+
+declare global {
+  interface HTMLMyAppElement extends MyApp, HTMLStencilElement {
+  }
+  var HTMLMyAppElement: {
+    prototype: HTMLMyAppElement;
+    new (): HTMLMyAppElement;
+  };
+  interface HTMLElementTagNameMap {
+    "my-app": HTMLMyAppElement;
+  }
+  interface ElementTagNameMap {
+    "my-app": HTMLMyAppElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "my-app": JSXElements.MyAppAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface MyAppAttributes extends HTMLAttributes {
+      
+    }
+  }
+}
+
+declare global { namespace JSX { interface StencilJSX {} } }

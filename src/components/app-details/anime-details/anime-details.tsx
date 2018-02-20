@@ -50,16 +50,16 @@ export class AnimeDetails {
         {
           this.anime.bannerImage !== null &&
           (<div class="anime-details-header">
-            <img src={this.anime.bannerImage} alt="Banner image"/>
+            <lazy-img src={this.anime.bannerImage} alt="Banner image"/>
           </div>)
         }
         <div class="anime-details-content">
           <div class="anime-details-content-top">
             {
               this.isDevice === true ? (
-                <img src={this.anime.coverImage.medium} alt="Cover image"/>
+                <lazy-img src={this.anime.coverImage.medium} alt="Cover image"/>
               ) : (
-                <img src={this.anime.coverImage.large} alt="Cover image"/>
+                <lazy-img src={this.anime.coverImage.large} alt="Cover image"/>
               )
             }
             <div class="anime-details-content-top-information">

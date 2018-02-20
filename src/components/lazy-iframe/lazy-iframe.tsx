@@ -38,9 +38,6 @@ export class LazyIframe {
   }
 
   cleanup() {
-    // always make sure we remove the intersection
-    // observer when its served its purpose so we dont
-    // eat cpu cycles unnecessarily
     if (this.io) {
       this.io.disconnect();
       this.io = null;

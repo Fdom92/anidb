@@ -1,4 +1,4 @@
-import { Component, State, Listen } from '@stencil/core';
+import { Component, State } from '@stencil/core';
 import { animeList } from '../../helpers/graphql.queries';
 
 @Component({
@@ -57,12 +57,14 @@ export class AppHome {
         </ion-header>
 
         <ion-content>
-          <ion-list>
           {this.animes.length !== 0
-            ? this.animes
-            : <p>Loading animes...</p>
+            ?
+            (<ion-list>
+                {this.animes}
+            </ion-list>)
+            :
+            <ion-skeleton-text text-center width="100"></ion-skeleton-text>
           }
-          </ion-list>
         </ion-content>
       </ion-page>
     );
