@@ -1,3 +1,5 @@
+import '@stencil/router';
+import '@ionic/core';
 import { Component, Prop, Listen } from '@stencil/core';
 import { ToastController } from '@ionic/core';
 

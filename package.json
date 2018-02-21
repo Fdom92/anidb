@@ -17,17 +17,26 @@
   },
   "dependencies": {
     "@ionic/core": "0.0.2-63",
-    "@stencil/core": "0.4.0",
-    "@stencil/router": "0.0.25"
+    "@stencil/core": "0.6.0",
+    "@stencil/router": "latest"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
+    "@stencil/sass": "0.0.2",
     "@stencil/utils": "latest",
     "@types/jest": "^21.1.1",
     "jest": "^21.2.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fdom92/anidb.git"
+  },
   "author": "Fernando del olmo martín",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fdom92/anidb"
+  },
+  "homepage": "https://github.com/Fdom92/anidb",
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
