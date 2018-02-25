@@ -1,5 +1,5 @@
 export const  animeList = `
-  query ($page: Int, $perPage: Int, $averageScore_greater: Int) {
+  query ($id: Int, $page: Int, $perPage: Int, $search: String) {
     Page (page: $page, perPage: $perPage) {
       pageInfo {
         total
@@ -8,7 +8,7 @@ export const  animeList = `
         hasNextPage
         perPage
       }
-      media (averageScore_greater: $averageScore_greater) {
+      media (id: $id, search: $search) {
         id
         coverImage {
           large

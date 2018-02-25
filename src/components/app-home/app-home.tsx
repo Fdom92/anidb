@@ -1,4 +1,4 @@
-import { Component, State } from '@stencil/core';
+import { Component, State, Listen } from '@stencil/core';
 import { animeList } from '../../helpers/graphql.queries';
 
 @Component({
@@ -10,11 +10,28 @@ export class AppHome {
   @State() animes   = [];
   @State() pageInfo = {};
 
+  @Listen('ionInput')
+  ionInputHandler(event) {
+    if (event.detail.target && event.detail.target.value.length > 8) {
+      var variables = {
+        search: event.detail.target.value,
+        page: 1,
+        perPage: 15
+      };
+
+      this.getAnimes(variables);
+    }
+  }
+
   componentWillLoad() {
+    this.searchDefaultAnimes();
+  }
+
+  searchDefaultAnimes() {
     var variables = {
-      averageScore_greater: 80,
+      search: 'a',
       page: 1,
-      perPage: 20
+      perPage: 15
     };
 
     this.getAnimes(variables);
@@ -39,10 +56,12 @@ export class AppHome {
     fetch(url, options)
       .then(response => response.json())
       .then(data => {
-        this.animes = data.data.Page.media.map(element => {
-          return (<anime-item anime={element}></anime-item>);
-        });
-        this.pageInfo = data.data.Page.pageInfo;
+        if (data.data.Page.media.length > 1) {
+          this.animes = data.data.Page.media.map(element => {
+            return (<anime-item anime={element}></anime-item>);
+          });
+          this.pageInfo = data.data.Page.pageInfo;
+        }
       })
       .catch(console.error);
   }
@@ -53,6 +72,7 @@ export class AppHome {
         <ion-header md-height='56px'>
           <ion-toolbar>
             <ion-title text-center>AniDB</ion-title>
+            <ion-searchbar></ion-searchbar>
           </ion-toolbar>
         </ion-header>
 
@@ -63,7 +83,7 @@ export class AppHome {
                 {this.animes}
             </ion-list>)
             :
-            <ion-skeleton-text text-center width="100"></ion-skeleton-text>
+            <ion-skeleton-text></ion-skeleton-text>
           }
         </ion-content>
       </ion-page>

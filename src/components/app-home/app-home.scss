@@ -15,5 +15,12 @@ app-home {
 
   ion-scroll {
     padding: 15px;
+
+    .no-data-text {
+      display: flex;
+      justify-content: center;
+      margin-top: 50%;
+      font-style: italic;
+    }
   }
 }
