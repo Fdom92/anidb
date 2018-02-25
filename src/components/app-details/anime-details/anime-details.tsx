@@ -10,6 +10,7 @@ export class AnimeDetails {
   @Element() el: Element;
 
   @State() isDevice: boolean = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  @State() characters: any;
 
   @Prop() anime: any;
 
@@ -20,6 +21,15 @@ export class AnimeDetails {
       (this.el.querySelector('#background') as HTMLElement).style.display = 'none';
       (this.el.querySelector('#mobile-video') as HTMLElement).style.display = 'flex';
     }
+
+    this.characters = this.anime.characters.nodes.map(character => {
+      return <ion-item>
+              <ion-avatar slot="start">
+                <lazy-img avatar={true} src={character.image.medium} alt="anime avatar"/>
+              </ion-avatar>
+              <p>{character.name.first} {character.name.last}</p>
+        </ion-item>
+    });
   }
 
   cleanHtml(html) {
@@ -70,6 +80,9 @@ export class AnimeDetails {
                 Score: {this.anime.averageScore/10}
               </p>
               <p>
+                Genres: {this.anime.genres.join(', ')}
+              </p>
+              <p>
                 Start date:
                 {this.anime.startDate.day}/
                 {this.anime.startDate.month}/
@@ -102,7 +115,14 @@ export class AnimeDetails {
             </div>
           </div>
           <div class="anime-description">
+            <h2>Description</h2>
             <p> { this.cleanHtml(this.anime.description) } </p>
+          </div>
+          <div class="anime-characters">
+            <h2>Characters</h2>
+            <ion-list>
+              {this.characters}
+            </ion-list>
           </div>
         </div>
       </div>

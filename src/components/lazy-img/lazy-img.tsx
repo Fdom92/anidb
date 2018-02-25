@@ -31,6 +31,10 @@ export class LazyImg {
   handleImage() {
     const image: HTMLImageElement = this.el.shadowRoot.querySelector('img');
     image.setAttribute('src', image.getAttribute('data-src'));
+    image.onerror = () => {
+      image.setAttribute('src', '../assets/default.png');
+      image.removeAttribute('data-src');
+    };
     image.onload = () => {
       image.removeAttribute('data-src');
     };

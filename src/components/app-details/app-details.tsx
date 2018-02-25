@@ -34,7 +34,7 @@ export class AppDetails {
     fetch(url, options)
       .then(response => response.json())
       .then(data => {
-        const animeData = data.data.Page.media[0];
+        const animeData = data.data.Media;
         this.anime = <anime-details anime={animeData}></anime-details>;
       })
       .catch(console.error);

@@ -9,11 +9,11 @@ export const  animeList = `
         perPage
       }
       media (averageScore_greater: $averageScore_greater) {
-        id,
+        id
         coverImage {
-          large,
+          large
           medium
-        },
+        }
         title {
           romaji
         }
@@ -23,52 +23,58 @@ export const  animeList = `
   `;
 
 export const  animeDetails = `
-  query ($page: Int, $perPage: Int, $id: Int) {
-    Page (page: $page, perPage: $perPage) {
-      pageInfo {
-        total
-        currentPage
-        lastPage
-        hasNextPage
-        perPage
+  query ($id: Int) {
+    Media (id: $id) {
+      id
+      description
+      averageScore
+      startDate {
+        year
+        month
+        day
       }
-      media (id: $id) {
-        id,
-        description,
-        averageScore,
-        startDate {
-          year,
-          month,
-          day
-        },
-        endDate {
-          year,
-          month,
-          day
-        },
-        title {
-          romaji
-        },
-        coverImage {
-          large,
-          medium
-        },
-        bannerImage,
-        nextAiringEpisode {
-          airingAt,
-          episode
-        },
-        streamingEpisodes {
-          title,
-          thumbnail,
-          url,
-          site
-        },
-        trailer {
-          id,
-          site
+      endDate {
+        year
+        month
+        day
+      }
+      title {
+        romaji
+      }
+      coverImage {
+        large
+        medium
+      }
+      bannerImage
+      nextAiringEpisode {
+        airingAt
+        episode
+      }
+      streamingEpisodes {
+        title
+        thumbnail
+        url
+        site
+      }
+      trailer {
+        id
+        site
+      }
+      characters {
+        nodes {
+          id
+          name {
+            first
+            last
+          }
+          image {
+            large
+            medium
+          }
+          description
         }
       }
+      genres
     }
   }
 `;

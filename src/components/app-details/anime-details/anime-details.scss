@@ -7,6 +7,7 @@ anime-details {
       flex-direction: row;
 
       .anime-details-content-top-information {
+        font-size: 16px;
         padding-left: 25px;
 
         .anime-trailer {
@@ -18,7 +19,7 @@ anime-details {
       }
     }
     .anime-description {
-      font-size: 16px;
+        font-size: 16px;
     }
   }
 
@@ -88,6 +89,7 @@ anime-details {
     .anime-details-content-top-information {
       h1 {
         font-size: 18px;
+        margin-top: 0;
       }
       p {
         font-size: 14px;
@@ -97,8 +99,19 @@ anime-details {
     }
 
     .anime-description {
-      font-size: 16px;
       line-height: 1.3em;
+      h2 {
+        font-size: 18px;
+      }
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .anime-characters {
+      h2 {
+        font-size: 18px;
+      }
     }
 
     #launch-video {
