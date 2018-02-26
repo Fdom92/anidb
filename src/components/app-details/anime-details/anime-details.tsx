@@ -76,27 +76,30 @@ export class AnimeDetails {
               <h1>
                 {this.anime.title.romaji}
               </h1>
-              <p>
-                Score: {this.anime.averageScore/10}
-              </p>
-              <p>
-                Genres: {this.anime.genres.join(', ')}
-              </p>
-              <p>
-                Start date:
-                {this.anime.startDate.day}/
-                {this.anime.startDate.month}/
-                {this.anime.startDate.year}
-              </p>
               {this.anime.endDate.day !== null ?
               (<p>
-                End date:
-                {this.anime.endDate.day}/
-                {this.anime.endDate.month}/
-                {this.anime.endDate.year}
-              </p>)
-            : (<p>
-                End date: Not finished yet
+                <label class="anime-start-date">
+                  {this.anime.startDate.day}/
+                  {this.anime.startDate.month}/
+                  {this.anime.startDate.year}
+                </label>
+                -
+                <label class="anime-end-date">
+                  {this.anime.endDate.day}/
+                  {this.anime.endDate.month}/
+                  {this.anime.endDate.year}
+                </label>
+              </p>) :
+              (<p>
+                <label class="anime-start-date">
+                  {this.anime.startDate.day}/
+                  {this.anime.startDate.month}/
+                  {this.anime.startDate.year}
+                </label>
+                -
+                <label class="anime-end-date">
+                  Not finished yet
+                </label>
               </p>)}
               {this.anime.trailer !== null &&
               (<div class="anime-trailer">
@@ -112,6 +115,13 @@ export class AnimeDetails {
                   <span>Go see the trailer</span>
                 </a>
               </div>)}
+              <div class="anime-genres">
+              {this.anime.genres.map(genre =>
+                (<ion-chip>
+                  <ion-label>{genre}</ion-label>
+                </ion-chip>)
+              )}
+              </div>
             </div>
           </div>
           <div class="anime-description">

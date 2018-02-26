@@ -11,10 +11,26 @@ anime-details {
         padding-left: 25px;
 
         .anime-trailer {
+          margin-bottom: 5px;
           span {
             color: black;
             text-decoration: underline;
           }
+        }
+
+        .anime-start-date {
+          margin-right: 5px;
+        }
+
+        .anime-end-date {
+          margin-left: 5px;
+        }
+
+        ion-chip {
+          background-color: #eaa000;
+          color: white;
+          margin-right: 5px;
+          margin-bottom: 5px;
         }
       }
     }
