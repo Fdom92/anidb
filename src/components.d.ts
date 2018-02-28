@@ -138,6 +138,68 @@ declare global {
 
 
 import {
+  LazyAvatar as LazyAvatar
+} from './components/lazy-avatar/lazy-avatar';
+
+declare global {
+  interface HTMLLazyAvatarElement extends LazyAvatar, HTMLStencilElement {
+  }
+  var HTMLLazyAvatarElement: {
+    prototype: HTMLLazyAvatarElement;
+    new (): HTMLLazyAvatarElement;
+  };
+  interface HTMLElementTagNameMap {
+    "lazy-avatar": HTMLLazyAvatarElement;
+  }
+  interface ElementTagNameMap {
+    "lazy-avatar": HTMLLazyAvatarElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "lazy-avatar": JSXElements.LazyAvatarAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface LazyAvatarAttributes extends HTMLAttributes {
+      alt?: string;
+      src?: string;
+    }
+  }
+}
+
+
+import {
+  LazyBanner as LazyBanner
+} from './components/lazy-banner/lazy-banner';
+
+declare global {
+  interface HTMLLazyBannerElement extends LazyBanner, HTMLStencilElement {
+  }
+  var HTMLLazyBannerElement: {
+    prototype: HTMLLazyBannerElement;
+    new (): HTMLLazyBannerElement;
+  };
+  interface HTMLElementTagNameMap {
+    "lazy-banner": HTMLLazyBannerElement;
+  }
+  interface ElementTagNameMap {
+    "lazy-banner": HTMLLazyBannerElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "lazy-banner": JSXElements.LazyBannerAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface LazyBannerAttributes extends HTMLAttributes {
+      alt?: string;
+      src?: string;
+    }
+  }
+}
+
+
+import {
   LazyIframe as LazyIframe
 } from './components/lazy-iframe/lazy-iframe';
 
@@ -193,7 +255,6 @@ declare global {
   namespace JSXElements {
     export interface LazyImgAttributes extends HTMLAttributes {
       alt?: string;
-      avatar?: boolean;
       src?: string;
     }
   }

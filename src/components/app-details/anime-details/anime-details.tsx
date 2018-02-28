@@ -25,7 +25,7 @@ export class AnimeDetails {
     this.characters = this.anime.characters.nodes.map(character => {
       return <ion-item>
               <ion-avatar slot="start">
-                <lazy-img avatar={true} src={character.image.medium} alt="anime avatar"/>
+                <lazy-avatar src={character.image.medium} alt="anime avatar"/>
               </ion-avatar>
               <p>{character.name.first} {character.name.last}</p>
         </ion-item>
@@ -60,7 +60,7 @@ export class AnimeDetails {
         {
           this.anime.bannerImage !== null &&
           (<div class="anime-details-header">
-            <lazy-img src={this.anime.bannerImage} alt="Banner image"/>
+            <lazy-banner src={this.anime.bannerImage} alt="Banner image"/>
           </div>)
         }
         <div class="anime-details-content">

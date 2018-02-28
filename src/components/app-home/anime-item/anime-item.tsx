@@ -1,4 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
 
 
 @Component({
@@ -9,12 +9,11 @@ export class AnimeItem {
 
   @Prop() anime: any;
 
-  @State() avatar = true;
   render() {
     return (
       <ion-item>
           <ion-avatar slot="start">
-            <lazy-img avatar={this.avatar} src={this.anime.coverImage.medium} alt="anime avatar"/>
+            <lazy-avatar src={this.anime.coverImage.medium} alt="anime avatar"/>
           </ion-avatar>
         <stencil-route-link url={'/details/' + this.anime.id}>
           {this.anime.title.romaji}

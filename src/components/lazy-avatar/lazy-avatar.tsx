@@ -2,11 +2,11 @@ import { Component, Element, Prop, State } from '@stencil/core';
 
 
 @Component({
-  tag: 'lazy-img',
-  styleUrl: 'lazy-img.scss',
+  tag: 'lazy-avatar',
+  styleUrl: 'lazy-avatar.scss',
   shadow: true
 })
-export class LazyImg {
+export class LazyAvatar {
 
   @Element() el: HTMLElement;
 
