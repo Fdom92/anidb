@@ -5,100 +5,18 @@ anime-details {
     .anime-details-content-top {
       display: flex;
       flex-direction: row;
+      width: 100%;
 
       .anime-details-content-top-information {
+        width: 100%;
         font-size: 16px;
         padding-left: 25px;
-
-        .anime-trailer {
-          margin-bottom: 5px;
-          span {
-            color: black;
-            text-decoration: underline;
-          }
-        }
-
-        .anime-start-date {
-          margin-right: 5px;
-        }
-
-        .anime-end-date {
-          margin-left: 5px;
-        }
-
-        ion-chip {
-          background-color: #eaa000;
-          color: white;
-          margin-right: 5px;
-          margin-bottom: 5px;
-        }
       }
     }
+
     .anime-description {
         font-size: 16px;
     }
-  }
-
-  #youtube-video {
-    opacity: 0;
-    transition: opacity 0.3s, transform 0.3s cubic-bezier(0.36,0.66,0.04,1);
-    position: absolute;
-    z-index: 9999;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    left: 0;
-    width: 100%;
-
-    iframe {
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.15), 0px 20px 40px rgba(0,0,0,0.2);
-      border-radius: 8px;
-    }
-  }
-
-  .youtube-show {
-    opacity: 1 !important;
-    transform: /*scale(3)*/ translatey(-30px) !important;
-    pointer-events: auto !important;
-  }
-
-  #background {
-    height: 100%;
-    position: fixed;
-    width: 100%;
-    z-index: 8888;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    opacity: 0;
-    pointer-events: none;
-    background-color: #00082d;
-    transition: opacity 0.3s cubic-bezier(0.36,0.66,0.04,1);
-  }
-
-  .background-show {
-    opacity: 0.4 !important;
-    pointer-events: auto !important;
-  }
-
-  #launch-video, #mobile-video {
-    transition: all .2s ease;
-    cursor: pointer;
-    text-decoration: none;
-    outline: none;
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    span {
-      transition: all .15s ease;
-    }
-  }
-
-  #mobile-video {
-    display: none;
   }
 
   @media screen and (max-width: 740px) {
@@ -122,24 +40,6 @@ anime-details {
       p {
         font-size: 16px;
       }
-    }
-
-    .anime-characters {
-      h2 {
-        font-size: 18px;
-      }
-    }
-
-    #launch-video {
-      display: none;
-    }
-
-    #youtube-video {
-      display: none;
-    }
-
-    #mobile-video {
-      display: flex;
     }
   }
 }

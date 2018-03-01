@@ -58,7 +58,7 @@ export class AppHome {
       .then(data => {
         if (data.data.Page.media.length > 1) {
           this.animes = data.data.Page.media.map(element => {
-            return (<anime-item anime={element}></anime-item>);
+            return (<home-item anime={element}></home-item>);
           });
           this.pageInfo = data.data.Page.pageInfo;
         }

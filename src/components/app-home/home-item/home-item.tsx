@@ -2,10 +2,10 @@ import { Component, Prop } from '@stencil/core';
 
 
 @Component({
-  tag: 'anime-item',
-  styleUrl: 'anime-item.scss'
+  tag: 'home-item',
+  styleUrl: 'home-item.scss'
 })
-export class AnimeItem {
+export class HomeItem {
 
   @Prop() anime: any;
 

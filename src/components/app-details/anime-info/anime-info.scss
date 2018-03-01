@@ -1,0 +1,31 @@
+anime-info {
+  .anime-info-section {
+    display: flex;
+    flex-direction: column;
+
+    .anime-info-row {
+      .left-section {
+        font-size: 18px;
+        float: left;
+      }
+
+      .right-section {
+        font-size: 18px;
+        float: right;
+      }
+    }
+  }
+  @media screen and (max-width: 740px) {
+    .anime-info-section {
+      .anime-info-row {
+        .left-section {
+          font-size: 16px;
+        }
+
+        .right-section {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

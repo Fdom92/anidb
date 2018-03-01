@@ -3,18 +3,57 @@
  * It contains typing information for all components that exist in this project
  * and imports for stencil collections that might be configured in your stencil.config.js file
  */
+declare global {
+  namespace JSX {
+    interface Element {}
+    export interface IntrinsicElements {}
+  }
+  namespace JSXElements {}
+
+  interface HTMLStencilElement extends HTMLElement {
+    componentOnReady(): Promise<this>;
+    componentOnReady(done: (ele?: this) => void): void;
+  }
+
+  interface HTMLAttributes {}
+}
+
+import '@stencil/router';
+import 'ionicons';
+import '@ionic/core';
 
 import {
   MatchResults,
 } from '@stencil/router';
 
+import {
+  AnimeCharacters as AnimeCharacters
+} from './components/app-details/anime-characters/anime-characters';
+
 declare global {
-  interface HTMLStencilElement extends HTMLElement {
-    componentOnReady(): Promise<this>;
-    componentOnReady(done: (ele?: this) => void): void;
+  interface HTMLAnimeCharactersElement extends AnimeCharacters, HTMLStencilElement {
+  }
+  var HTMLAnimeCharactersElement: {
+    prototype: HTMLAnimeCharactersElement;
+    new (): HTMLAnimeCharactersElement;
+  };
+  interface HTMLElementTagNameMap {
+    "anime-characters": HTMLAnimeCharactersElement;
+  }
+  interface ElementTagNameMap {
+    "anime-characters": HTMLAnimeCharactersElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "anime-characters": JSXElements.AnimeCharactersAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AnimeCharactersAttributes extends HTMLAttributes {
+      anime?: any;
+    }
   }
 }
-
 
 
 import {
@@ -42,6 +81,96 @@ declare global {
   namespace JSXElements {
     export interface AnimeDetailsAttributes extends HTMLAttributes {
       anime?: any;
+    }
+  }
+}
+
+
+import {
+  AnimeGenres as AnimeGenres
+} from './components/app-details/anime-genres/anime-genres';
+
+declare global {
+  interface HTMLAnimeGenresElement extends AnimeGenres, HTMLStencilElement {
+  }
+  var HTMLAnimeGenresElement: {
+    prototype: HTMLAnimeGenresElement;
+    new (): HTMLAnimeGenresElement;
+  };
+  interface HTMLElementTagNameMap {
+    "anime-genres": HTMLAnimeGenresElement;
+  }
+  interface ElementTagNameMap {
+    "anime-genres": HTMLAnimeGenresElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "anime-genres": JSXElements.AnimeGenresAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AnimeGenresAttributes extends HTMLAttributes {
+      genres?: any;
+    }
+  }
+}
+
+
+import {
+  AnimeInfo as AnimeInfo
+} from './components/app-details/anime-info/anime-info';
+
+declare global {
+  interface HTMLAnimeInfoElement extends AnimeInfo, HTMLStencilElement {
+  }
+  var HTMLAnimeInfoElement: {
+    prototype: HTMLAnimeInfoElement;
+    new (): HTMLAnimeInfoElement;
+  };
+  interface HTMLElementTagNameMap {
+    "anime-info": HTMLAnimeInfoElement;
+  }
+  interface ElementTagNameMap {
+    "anime-info": HTMLAnimeInfoElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "anime-info": JSXElements.AnimeInfoAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AnimeInfoAttributes extends HTMLAttributes {
+      anime?: any;
+    }
+  }
+}
+
+
+import {
+  AnimeTrailer as AnimeTrailer
+} from './components/app-details/anime-trailer/anime-trailer';
+
+declare global {
+  interface HTMLAnimeTrailerElement extends AnimeTrailer, HTMLStencilElement {
+  }
+  var HTMLAnimeTrailerElement: {
+    prototype: HTMLAnimeTrailerElement;
+    new (): HTMLAnimeTrailerElement;
+  };
+  interface HTMLElementTagNameMap {
+    "anime-trailer": HTMLAnimeTrailerElement;
+  }
+  interface ElementTagNameMap {
+    "anime-trailer": HTMLAnimeTrailerElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "anime-trailer": JSXElements.AnimeTrailerAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AnimeTrailerAttributes extends HTMLAttributes {
+      trailer?: any;
     }
   }
 }
@@ -78,36 +207,6 @@ declare global {
 
 
 import {
-  AnimeItem as AnimeItem
-} from './components/app-home/anime-item/anime-item';
-
-declare global {
-  interface HTMLAnimeItemElement extends AnimeItem, HTMLStencilElement {
-  }
-  var HTMLAnimeItemElement: {
-    prototype: HTMLAnimeItemElement;
-    new (): HTMLAnimeItemElement;
-  };
-  interface HTMLElementTagNameMap {
-    "anime-item": HTMLAnimeItemElement;
-  }
-  interface ElementTagNameMap {
-    "anime-item": HTMLAnimeItemElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      "anime-item": JSXElements.AnimeItemAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface AnimeItemAttributes extends HTMLAttributes {
-      anime?: any;
-    }
-  }
-}
-
-
-import {
   AppHome as AppHome
 } from './components/app-home/app-home';
 
@@ -132,6 +231,36 @@ declare global {
   namespace JSXElements {
     export interface AppHomeAttributes extends HTMLAttributes {
       
+    }
+  }
+}
+
+
+import {
+  HomeItem as HomeItem
+} from './components/app-home/home-item/home-item';
+
+declare global {
+  interface HTMLHomeItemElement extends HomeItem, HTMLStencilElement {
+  }
+  var HTMLHomeItemElement: {
+    prototype: HTMLHomeItemElement;
+    new (): HTMLHomeItemElement;
+  };
+  interface HTMLElementTagNameMap {
+    "home-item": HTMLHomeItemElement;
+  }
+  interface ElementTagNameMap {
+    "home-item": HTMLHomeItemElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "home-item": JSXElements.HomeItemAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface HomeItemAttributes extends HTMLAttributes {
+      anime?: any;
     }
   }
 }

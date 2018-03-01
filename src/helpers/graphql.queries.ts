@@ -38,6 +38,9 @@ export const  animeDetails = `
         month
         day
       }
+      type
+      format
+      status
       title {
         romaji
       }
