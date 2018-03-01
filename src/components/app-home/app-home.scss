@@ -1,4 +1,23 @@
 app-home {
+  .break-fix {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    position: absolute;
+    z-index: 0;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 100%;
+
+    contain: layout size style;
+  }
+
   ion-toolbar {
     .toolbar-background {
       background-color: #eaa000;

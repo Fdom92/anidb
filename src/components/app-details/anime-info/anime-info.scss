@@ -2,6 +2,7 @@ anime-info {
   .anime-info-section {
     display: flex;
     flex-direction: column;
+    max-width: 200px;
 
     .anime-info-row {
       .left-section {

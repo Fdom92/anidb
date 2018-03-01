@@ -8,7 +8,7 @@ export const  animeList = `
         hasNextPage
         perPage
       }
-      media (id: $id, search: $search) {
+      media (id: $id, search: $search, isAdult: false) {
         id
         coverImage {
           large
@@ -41,6 +41,11 @@ export const  animeDetails = `
       type
       format
       status
+      season
+      episodes
+      duration
+      chapters
+      volumes
       title {
         romaji
       }
@@ -64,17 +69,27 @@ export const  animeDetails = `
         site
       }
       characters {
-        nodes {
-          id
-          name {
-            first
-            last
+        edges {
+          node {
+            id
+            name {
+              first
+              last
+            }
+            image {
+              large
+              medium
+            }
+            description
           }
-          image {
-            large
-            medium
+          role
+          voiceActors {
+            id
+            name {
+              first
+              last
+            }
           }
-          description
         }
       }
       genres

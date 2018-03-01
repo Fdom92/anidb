@@ -12,12 +12,12 @@ export class AnimeCharacters {
   @Prop() anime: any;
 
   componentDidLoad() {
-    this.characters = this.anime.characters.nodes.map(character => {
+    this.characters = this.anime.characters.edges.map(edge => {
       return <ion-item>
                 <ion-avatar slot="start">
-                  <lazy-avatar src={character.image.medium} alt="anime avatar"/>
+                  <lazy-avatar src={edge.node.image.medium} alt="anime avatar"/>
                 </ion-avatar>
-                <p>{character.name.first} {character.name.last}</p>
+                <p>{edge.node.name.first} {edge.node.name.last}</p>
               </ion-item>
     });
   }

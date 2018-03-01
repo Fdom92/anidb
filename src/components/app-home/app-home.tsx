@@ -68,7 +68,7 @@ export class AppHome {
 
   render() {
     return (
-      <ion-page class='show-page'>
+      <ion-page class='break-fix show-page'>
         <ion-header md-height='56px'>
           <ion-toolbar>
             <ion-title text-center>AniDB</ion-title>
