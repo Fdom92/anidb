@@ -21,12 +21,12 @@ export class AnimeInfo {
 
     if (this.anime.startDate.day) {
       this.startDate = this.anime.startDate.day + '/';
-      if (this.anime.startDate.month) {
-        this.startDate += this.anime.startDate.month + '/';
-        if (this.anime.startDate.year) {
-          this.startDate += this.anime.startDate.year;
-        }
-      }
+    }
+    if (this.anime.startDate.month) {
+      this.startDate += this.anime.startDate.month + '/';
+    }
+    if (this.anime.startDate.year) {
+      this.startDate += this.anime.startDate.year;
     }
   }
 
