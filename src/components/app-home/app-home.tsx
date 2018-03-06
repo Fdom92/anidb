@@ -1,5 +1,6 @@
-import { Component, State, Listen } from '@stencil/core';
+import { Component, State, Listen, Prop } from '@stencil/core';
 import { animeList } from '../../helpers/graphql.queries';
+import { AlertController } from '@ionic/core';
 
 @Component({
   tag: 'app-home',
@@ -9,17 +10,14 @@ export class AppHome {
 
   @State() animes   = [];
   @State() pageInfo = {};
+  @State() value = '';
+
+  @Prop({ connect: 'ion-alert-controller' }) alertCtrl: AlertController;
 
   @Listen('ionInput')
   ionInputHandler(event) {
-    if (event.detail.target && event.detail.target.value.length > 8) {
-      var variables = {
-        search: event.detail.target.value,
-        page: 1,
-        perPage: 15
-      };
-
-      this.getAnimes(variables);
+    if (event.detail.target) {
+      this.value = event.detail.target.value;
     }
   }
 
@@ -61,9 +59,33 @@ export class AppHome {
             return (<home-item anime={element}></home-item>);
           });
           this.pageInfo = data.data.Page.pageInfo;
+        } else {
+          this.presentAlert();
         }
       })
       .catch(console.error);
+  }
+
+  async presentAlert() {
+    const alert = await this.alertCtrl.create({
+      title: 'Oops!',
+      message: 'Didn\'t find results for that search, try again.',
+      buttons: ['OK']
+    });
+    return await alert.present();
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.value && this.value.length > 3) {
+      var variables = {
+        search: this.value,
+        page: 1,
+        perPage: 15
+      };
+
+      this.getAnimes(variables);
+    }
   }
 
   render() {
@@ -72,7 +94,10 @@ export class AppHome {
         <ion-header md-height='56px'>
           <ion-toolbar>
             <ion-title text-center>AniDB</ion-title>
-            <ion-searchbar></ion-searchbar>
+            <form onSubmit={(e) => this.handleSubmit(e)}>
+              <ion-searchbar></ion-searchbar>
+              <input class="submit-button" type="submit" value="Submit"/>
+            </form>
           </ion-toolbar>
         </ion-header>
 
