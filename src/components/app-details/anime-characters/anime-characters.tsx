@@ -24,7 +24,7 @@ export class AnimeCharacters {
 
   render() {
     return (
-      this.anime.characters.edges > 1 &&
+      this.anime.characters.edges.length > 1 &&
       <div>
         <h2>Characters</h2>
         <ion-list>
