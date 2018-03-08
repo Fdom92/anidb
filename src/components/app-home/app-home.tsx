@@ -10,22 +10,29 @@ export class AppHome {
 
   @State() animes   = [];
   @State() pageInfo = {};
-  @State() value = '';
+  @State() searchQuery = '';
+  @State() loadingItems = [];
 
   @Prop({ connect: 'ion-alert-controller' }) alertCtrl: AlertController;
 
   @Listen('ionInput')
   ionInputHandler(event) {
     if (event.detail.target) {
-      this.value = event.detail.target.value;
+      this.searchQuery = event.detail.target.value;
     }
   }
 
   componentWillLoad() {
-    this.searchDefaultAnimes();
-  }
+    for (let i = 0; i < 5; i++) {
+      this.loadingItems.push(
+        <ion-item>
+          <ion-avatar slot="start">
+          </ion-avatar>
+          <ion-skeleton-text></ion-skeleton-text>
+        </ion-item>
+      );
+    }
 
-  searchDefaultAnimes() {
     var variables = {
       search: 'a',
       page: 1,
@@ -33,6 +40,20 @@ export class AppHome {
     };
 
     this.getAnimes(variables);
+  }
+
+  goSearch(e) {
+    e.preventDefault();
+    if (this.searchQuery && this.searchQuery.length > 3) {
+
+      var variables = {
+        search: this.searchQuery,
+        page: 1,
+        perPage: 15
+      };
+
+      this.getAnimes(variables);
+    }
   }
 
   getAnimes(variables) {
@@ -75,26 +96,13 @@ export class AppHome {
     return await alert.present();
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    if (this.value && this.value.length > 3) {
-      var variables = {
-        search: this.value,
-        page: 1,
-        perPage: 15
-      };
-
-      this.getAnimes(variables);
-    }
-  }
-
   render() {
     return (
       <ion-page class='break-fix show-page'>
         <ion-header md-height='56px'>
           <ion-toolbar>
             <ion-title text-center>AniDB</ion-title>
-            <form onSubmit={(e) => this.handleSubmit(e)}>
+            <form onSubmit={(e) => this.goSearch(e)}>
               <ion-searchbar></ion-searchbar>
               <input class="submit-button" type="submit" value="Submit"/>
             </form>
@@ -108,7 +116,9 @@ export class AppHome {
                 {this.animes}
             </ion-list>)
             :
-            <ion-skeleton-text></ion-skeleton-text>
+            (<ion-list>
+              {this.loadingItems}
+            </ion-list>)
           }
         </ion-content>
       </ion-page>
