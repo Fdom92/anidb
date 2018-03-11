@@ -1,6 +1,7 @@
 import { Component, State, Listen, Prop } from '@stencil/core';
 import { animeList } from '../../helpers/graphql.queries';
 import { AlertController } from '@ionic/core';
+import { presentAlert } from '../../helpers/utils';
 
 @Component({
   tag: 'app-home',
@@ -9,9 +10,10 @@ import { AlertController } from '@ionic/core';
 export class AppHome {
 
   @State() animes   = [];
-  @State() pageInfo = {};
-  @State() searchQuery = '';
+  @State() pageInfo: any;
+  @State() searchQuery = 'a';
   @State() loadingItems = [];
+  @State() didSearch = false;
 
   @Prop({ connect: 'ion-alert-controller' }) alertCtrl: AlertController;
 
@@ -22,8 +24,25 @@ export class AppHome {
     }
   }
 
+  @Listen('ionInfinite')
+  ionInfiniteHandler() {
+    const infiniteScroll: any = document.getElementById('infinite-scroll');
+    if (this.pageInfo.hasNextPage) {
+      let variables = {
+        search: this.searchQuery,
+        page: this.pageInfo.currentPage + 1,
+        perPage: 15
+      };
+      this.getAnimes(variables);
+      infiniteScroll.complete();
+    } else {
+      presentAlert(this.alertCtrl, 'Oops!', 'There aren\'t more results.');
+      infiniteScroll.complete();
+    }
+  }
+
   componentWillLoad() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       this.loadingItems.push(
         <ion-item>
           <ion-avatar slot="start">
@@ -46,6 +65,7 @@ export class AppHome {
     e.preventDefault();
     if (this.searchQuery && this.searchQuery.length > 3) {
 
+      this.didSearch = true;
       var variables = {
         search: this.searchQuery,
         page: 1,
@@ -75,25 +95,23 @@ export class AppHome {
     fetch(url, options)
       .then(response => response.json())
       .then(data => {
-        if (data.data.Page.media.length > 1) {
-          this.animes = data.data.Page.media.map(element => {
-            return (<home-item anime={element}></home-item>);
-          });
+        if (data.data.Page.media.length !== 0) {
+          if (this.didSearch) {
+            this.animes = data.data.Page.media.map(element => {
+              return (<home-item anime={element}></home-item>);
+            });
+            this.didSearch = false;
+          } else {
+            data.data.Page.media.map(element => {
+              this.animes.push(<home-item anime={element}></home-item>);
+            });
+          }
           this.pageInfo = data.data.Page.pageInfo;
         } else {
-          this.presentAlert();
+          presentAlert(this.alertCtrl, 'Oops!', 'Didn\'t find results for that search, try again.');
         }
       })
       .catch(console.error);
-  }
-
-  async presentAlert() {
-    const alert = await this.alertCtrl.create({
-      title: 'Oops!',
-      message: 'Didn\'t find results for that search, try again.',
-      buttons: ['OK']
-    });
-    return await alert.present();
   }
 
   render() {
@@ -120,6 +138,9 @@ export class AppHome {
               {this.loadingItems}
             </ion-list>)
           }
+          <ion-infinite-scroll id="infinite-scroll">
+            <ion-infinite-scroll-content></ion-infinite-scroll-content>
+          </ion-infinite-scroll>
         </ion-content>
       </ion-page>
     );

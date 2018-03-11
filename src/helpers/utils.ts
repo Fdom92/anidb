@@ -11,4 +11,13 @@ export function urlB64ToUint8Array(base64String) {
     outputArray[i] = rawData.charCodeAt(i);
   }
   return outputArray;
+};
+
+export async function presentAlert(alertCtrl, title, message) {
+  const alert = await alertCtrl.create({
+    title,
+    message,
+    buttons: ['OK']
+  });
+  return await alert.present();
 }
