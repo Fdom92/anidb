@@ -13,9 +13,13 @@ app-details {
     }
 
     ion-buttons {
-      button.back-button {
-        font-size: 24px;
-        color: white;
+      ion-back-button {
+        button {
+          ion-icon {
+            font-size: 24px;
+            color: white;
+          }
+        }
       }
     }
   }

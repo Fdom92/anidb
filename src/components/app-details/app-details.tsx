@@ -53,9 +53,7 @@ export class AppDetails {
         <ion-header md-height='56px'>
           <ion-toolbar>
             <ion-buttons slot='start'>
-              <ion-button fill='clear' onClick={() => this.goBack()} class="back-button" ion-button  icon-only>
-                <ion-icon class='icon-back' name="arrow-back"></ion-icon>
-              </ion-button>
+              <ion-back-button defaultHref='/'/>
             </ion-buttons>
             <ion-title text-center>AniDB</ion-title>
           </ion-toolbar>
