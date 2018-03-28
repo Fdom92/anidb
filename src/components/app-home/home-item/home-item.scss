@@ -1,10 +1,7 @@
 home-item {
   ion-item {
-    stencil-route-link {
-      a {
-        color: #121212;
-        text-decoration: none;
-      }
+    .home-item-text {
+      font-size: 16px;
     }
   }
 }

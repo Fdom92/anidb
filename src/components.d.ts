@@ -13,18 +13,17 @@ declare global {
   interface HTMLStencilElement extends HTMLElement {
     componentOnReady(): Promise<this>;
     componentOnReady(done: (ele?: this) => void): void;
+
+    forceUpdate(): void;
   }
 
   interface HTMLAttributes {}
 }
 
-import '@stencil/router';
 import 'ionicons';
 import '@ionic/core';
+import '@stencil/router';
 
-import {
-  MatchResults,
-} from '@stencil/router';
 
 import {
   AnimeCharacters as AnimeCharacters
@@ -51,6 +50,7 @@ declare global {
   namespace JSXElements {
     export interface AnimeCharactersAttributes extends HTMLAttributes {
       anime?: any;
+      
     }
   }
 }
@@ -81,6 +81,7 @@ declare global {
   namespace JSXElements {
     export interface AnimeDetailsAttributes extends HTMLAttributes {
       anime?: any;
+      
     }
   }
 }
@@ -111,6 +112,7 @@ declare global {
   namespace JSXElements {
     export interface AnimeGenresAttributes extends HTMLAttributes {
       genres?: any;
+      
     }
   }
 }
@@ -141,6 +143,7 @@ declare global {
   namespace JSXElements {
     export interface AnimeInfoAttributes extends HTMLAttributes {
       anime?: any;
+      
     }
   }
 }
@@ -171,6 +174,7 @@ declare global {
   namespace JSXElements {
     export interface AnimeTrailerAttributes extends HTMLAttributes {
       trailer?: any;
+      
     }
   }
 }
@@ -200,7 +204,8 @@ declare global {
   }
   namespace JSXElements {
     export interface AppDetailsAttributes extends HTMLAttributes {
-      match?: MatchResults;
+      id?: string;
+      
     }
   }
 }
@@ -230,6 +235,7 @@ declare global {
   }
   namespace JSXElements {
     export interface AppHomeAttributes extends HTMLAttributes {
+      
       
     }
   }
@@ -261,6 +267,7 @@ declare global {
   namespace JSXElements {
     export interface HomeItemAttributes extends HTMLAttributes {
       anime?: any;
+      
     }
   }
 }
@@ -292,6 +299,7 @@ declare global {
     export interface LazyAvatarAttributes extends HTMLAttributes {
       alt?: string;
       src?: string;
+      
     }
   }
 }
@@ -323,6 +331,7 @@ declare global {
     export interface LazyBannerAttributes extends HTMLAttributes {
       alt?: string;
       src?: string;
+      
     }
   }
 }
@@ -354,6 +363,7 @@ declare global {
     export interface LazyIframeAttributes extends HTMLAttributes {
       src?: string;
       title?: string;
+      
     }
   }
 }
@@ -385,6 +395,7 @@ declare global {
     export interface LazyImgAttributes extends HTMLAttributes {
       alt?: string;
       src?: string;
+      
     }
   }
 }
@@ -414,6 +425,7 @@ declare global {
   }
   namespace JSXElements {
     export interface MyAppAttributes extends HTMLAttributes {
+      
       
     }
   }

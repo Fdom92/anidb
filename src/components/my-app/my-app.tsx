@@ -31,15 +31,11 @@ export class MyApp {
   render() {
     return (
       <ion-app>
-        <main>
-          <stencil-router>
-            <stencil-route url='/' component='app-home' exact={true}>
-            </stencil-route>
-
-            <stencil-route url='/details/:id' component='app-details'>
-            </stencil-route>
-          </stencil-router>
-        </main>
+        <ion-router useHash={false}>
+          <ion-route url='/' component='app-home'></ion-route>
+          <ion-route url='/details/:id' component='app-details'></ion-route>
+        </ion-router>
+        <ion-nav swipeBackEnabled={false} main></ion-nav>
       </ion-app>
     );
   }

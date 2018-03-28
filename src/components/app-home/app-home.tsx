@@ -13,7 +13,11 @@ export class AppHome {
   @State() pageInfo: any;
   @State() searchQuery = 'a';
   @State() loadingItems = [];
-  @State() didSearch = false;
+  @State() setup = {
+    search: '',
+    page: 0,
+    perPage: 0
+  };
 
   @Prop({ connect: 'ion-alert-controller' }) alertCtrl: AlertController;
 
@@ -27,21 +31,22 @@ export class AppHome {
   @Listen('ionInfinite')
   ionInfiniteHandler() {
     const infiniteScroll: any = document.getElementById('infinite-scroll');
+    // If there are more animes to load
     if (this.pageInfo.hasNextPage) {
-      let variables = {
-        search: this.searchQuery,
-        page: this.pageInfo.currentPage + 1,
-        perPage: 15
-      };
+      // Get the actual setup and load the next page
+      let variables = this.setup;
+      this.setup.page = this.setup.page + 1;
       this.getAnimes(variables);
       infiniteScroll.complete();
     } else {
+      // No more animes to load
       presentAlert(this.alertCtrl, 'Oops!', 'There aren\'t more results.');
       infiniteScroll.complete();
     }
   }
 
   componentWillLoad() {
+    // Skeleton items while loading
     for (let i = 0; i < 10; i++) {
       this.loadingItems.push(
         <ion-item>
@@ -51,27 +56,29 @@ export class AppHome {
         </ion-item>
       );
     }
-
+    // Default search query
     var variables = {
-      search: 'a',
+      search: this.searchQuery,
       page: 1,
       perPage: 15
     };
-
+    // Save default setup and load animes
+    this.setup = variables;
     this.getAnimes(variables);
   }
 
   goSearch(e) {
     e.preventDefault();
+    // If the user typed on the searchbar
     if (this.searchQuery && this.searchQuery.length > 3) {
-
-      this.didSearch = true;
       var variables = {
         search: this.searchQuery,
         page: 1,
         perPage: 15
       };
-
+      // Clean up the animes, save the new setup and load animes
+      this.animes = [];
+      this.setup = variables;
       this.getAnimes(variables);
     }
   }
@@ -96,16 +103,9 @@ export class AppHome {
       .then(response => response.json())
       .then(data => {
         if (data.data.Page.media.length !== 0) {
-          if (this.didSearch) {
-            this.animes = data.data.Page.media.map(element => {
-              return (<home-item anime={element}></home-item>);
-            });
-            this.didSearch = false;
-          } else {
-            data.data.Page.media.map(element => {
-              this.animes.push(<home-item anime={element}></home-item>);
-            });
-          }
+          data.data.Page.media.map(element => {
+            this.animes.push(<home-item anime={element}></home-item>);
+          });
           this.pageInfo = data.data.Page.pageInfo;
         } else {
           presentAlert(this.alertCtrl, 'Oops!', 'Didn\'t find results for that search, try again.');
@@ -116,7 +116,7 @@ export class AppHome {
 
   render() {
     return (
-      <ion-page class='break-fix show-page'>
+      <ion-page class='show-page'>
         <ion-header md-height='56px'>
           <ion-toolbar>
             <ion-title text-center>AniDB</ion-title>

@@ -1,4 +1,4 @@
-import { Component, Prop } from '@stencil/core';
+import { Component, Prop, Element } from '@stencil/core';
 
 
 @Component({
@@ -7,17 +7,22 @@ import { Component, Prop } from '@stencil/core';
 })
 export class HomeItem {
 
+  @Element() el: Element;
+
   @Prop() anime: any;
+
+  navigateToDetails(id) {
+    // Nav to details passing the anime id as prop
+    this.el.closest('ion-nav').push('app-details', { id });
+  }
 
   render() {
     return (
-      <ion-item>
+      <ion-item onClick={() => this.navigateToDetails(this.anime.id)}>
           <ion-avatar slot="start">
             <lazy-avatar src={this.anime.coverImage.medium} alt="anime avatar"/>
           </ion-avatar>
-        <stencil-route-link url={'/details/' + this.anime.id}>
-          {this.anime.title.romaji}
-        </stencil-route-link>
+          <p class="home-item-text">{this.anime.title.romaji}</p>
       </ion-item>
     );
   }

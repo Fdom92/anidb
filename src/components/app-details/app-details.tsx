@@ -1,5 +1,4 @@
-import { Component, Prop, State } from '@stencil/core';
-import { MatchResults } from '@stencil/router';
+import { Component, Prop, State, Element } from '@stencil/core';
 import { animeDetails } from '../../helpers/graphql.queries';
 
 @Component({
@@ -8,14 +7,17 @@ import { animeDetails } from '../../helpers/graphql.queries';
 })
 export class AppDetails {
 
+  @Element() el: Element;
+
   @State() anime: any;
-  @Prop() match: MatchResults;
+  // Getting the id as prop from the ion nav
+  @Prop() id: string;
 
   componentWillLoad() {
     var query = animeDetails;
 
     var variables = {
-      id: this.match.params.id
+      id: this.id
     };
 
     var url = 'https://graphql.anilist.co',
@@ -40,11 +42,21 @@ export class AppDetails {
       .catch(console.error);
   }
 
+  goBack() {
+    // Nav back to previous page
+    this.el.closest('ion-nav').pop();
+  }
+
   render() {
     return (
-      <ion-page class='break-fix show-page'>
+      <ion-page class='show-page'>
         <ion-header md-height='56px'>
           <ion-toolbar>
+            <ion-buttons slot='start'>
+              <ion-button fill='clear' onClick={() => this.goBack()} class="back-button" ion-button  icon-only>
+                <ion-icon class='icon-back' name="arrow-back"></ion-icon>
+              </ion-button>
+            </ion-buttons>
             <ion-title text-center>AniDB</ion-title>
           </ion-toolbar>
         </ion-header>
