@@ -83,7 +83,7 @@ export class AppHome {
     }
   }
 
-  getAnimes(variables) {
+  async getAnimes(variables) {
     var query = animeList;
 
     var url = 'https://graphql.anilist.co',
@@ -99,19 +99,17 @@ export class AppHome {
           })
         };
 
-    fetch(url, options)
-      .then(response => response.json())
-      .then(data => {
-        if (data.data.Page.media.length !== 0) {
-          data.data.Page.media.map(element => {
-            this.animes.push(<home-item anime={element}></home-item>);
-          });
-          this.pageInfo = data.data.Page.pageInfo;
-        } else {
-          presentAlert(this.alertCtrl, 'Oops!', 'Didn\'t find results for that search, try again.');
-        }
-      })
-      .catch(console.error);
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    if (data.data.Page.media.length !== 0) {
+      data.data.Page.media.map(element => {
+        this.animes.push(<home-item anime={element}></home-item>);
+      });
+      this.pageInfo = data.data.Page.pageInfo;
+    } else {
+      presentAlert(this.alertCtrl, 'Oops!', 'Didn\'t find results for that search, try again.');
+    }
   }
 
   render() {
@@ -119,7 +117,9 @@ export class AppHome {
       <ion-page class='show-page'>
         <ion-header md-height='56px'>
           <ion-toolbar>
-            <ion-title text-center>AniDB</ion-title>
+            <ion-title>AniDB</ion-title>
+          </ion-toolbar>
+          <ion-toolbar>
             <form onSubmit={(e) => this.goSearch(e)}>
               <ion-searchbar></ion-searchbar>
               <input class="submit-button" type="submit" value="Submit"/>

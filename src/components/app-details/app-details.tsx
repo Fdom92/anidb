@@ -14,6 +14,10 @@ export class AppDetails {
   @Prop() id: string;
 
   componentWillLoad() {
+    this.loadDetails();
+  }
+
+  async loadDetails() {
     var query = animeDetails;
 
     var variables = {
@@ -33,13 +37,11 @@ export class AppDetails {
           })
         };
 
-    fetch(url, options)
-      .then(response => response.json())
-      .then(data => {
-        const animeData = data.data.Media;
-        this.anime = <anime-details anime={animeData}></anime-details>;
-      })
-      .catch(console.error);
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    const animeData = data.data.Media;
+    this.anime = <anime-details anime={animeData}></anime-details>;
   }
 
   goBack() {
@@ -55,7 +57,7 @@ export class AppDetails {
             <ion-buttons slot='start'>
               <ion-back-button defaultHref='/'/>
             </ion-buttons>
-            <ion-title text-center>AniDB</ion-title>
+            <ion-title>AniDB</ion-title>
           </ion-toolbar>
         </ion-header>
 
