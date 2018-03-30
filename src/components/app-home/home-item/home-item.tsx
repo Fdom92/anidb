@@ -11,14 +11,9 @@ export class HomeItem {
 
   @Prop() anime: any;
 
-  navigateToDetails(id) {
-    // Nav to details passing the anime id as prop
-    this.el.closest('ion-nav').push('app-details', { id });
-  }
-
   render() {
     return (
-      <ion-item onClick={() => this.navigateToDetails(this.anime.id)}>
+      <ion-item href={`/details/${this.anime.id}`}>
           <ion-avatar slot="start">
             <lazy-avatar src={this.anime.coverImage.medium} alt="anime avatar"/>
           </ion-avatar>
