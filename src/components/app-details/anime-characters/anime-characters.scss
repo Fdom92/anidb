@@ -18,3 +18,61 @@ anime-characters {
     }
   }
 }
+
+.character-modal {
+  ion-toolbar {
+    .toolbar-background {
+      background-color: #eaa000;
+    }
+
+    .toolbar-content {
+      ion-title {
+        .toolbar-title {
+          color: white;
+        }
+      }
+    }
+
+    ion-buttons {
+      button .button-text {
+        font-size: 36px;
+        color: white;
+        line-height: 1px;
+      }
+    }
+  }
+
+  ion-content {
+    ion-scroll {
+      .scroll-inner {
+        padding: 15px;
+      }
+    }
+
+    .content-top {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      .content-info {
+        width: 100%;
+        font-size: 16px;
+        padding-left: 25px;
+      }
+    }
+  }
+  h1 {
+    font-size: 24px;
+  }
+  p {
+    font-size: 18px;
+  }
+  @media screen and (max-width: 740px) {
+    h1 {
+      font-size: 18px;
+    }
+    p {
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+}
