@@ -1,0 +1,15 @@
+:host ion-toolbar .submit-button {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+}
+:host ion-scroll {
+  padding: 15px;
+}
+:host ion-scroll .no-data-text {
+  display: flex;
+  justify-content: center;
+  margin-top: 50%;
+  font-style: italic;
+}

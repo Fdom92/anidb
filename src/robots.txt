@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://anidb-e33a0.firebaseapp.com/assets/sitemap.xml

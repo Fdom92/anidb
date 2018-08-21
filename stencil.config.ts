@@ -1,6 +1,6 @@
-const sass = require('@stencil/sass');
+import { Config } from '@stencil/core';
 
-exports.config = {
+export const config: Config = {
   outputTargets: [
     {
       type: 'www',
@@ -17,12 +17,7 @@ exports.config = {
     }
   ],
   globalStyle: 'src/global/app.css',
-  plugins: [
-    sass()
+  copy: [
+    { src: 'robots.txt' }
   ]
-};
-
-exports.devServer = {
-  root: 'www',
-  watchGlob: '**/**'
 };

@@ -1,17 +1,17 @@
 import { Component, Prop, State } from '@stencil/core';
-import { ModalController } from '@ionic/core';
 
 
 @Component({
   tag: 'anime-characters',
-  styleUrl: 'anime-characters.scss'
+  styleUrl: 'anime-characters.css'
 })
 export class AnimeCharacters {
 
   @State() characters: any;
 
   @Prop() anime: any;
-  @Prop({ connect: 'ion-modal-controller' }) modalCtrl: ModalController;
+  @Prop({ connect: 'ion-modal-controller' })
+  modalCtrl: HTMLIonModalControllerElement;
 
   componentDidLoad() {
     this.characters = this.anime.characters.edges.map(edge => {
@@ -104,12 +104,10 @@ export class AnimeCharacters {
   render() {
     return (
       this.anime.characters.edges.length > 1 &&
-      <div>
-        <h2>Characters</h2>
+        [<h2>Characters</h2>,
         <ion-list>
           {this.characters}
-        </ion-list>
-      </div>
+        </ion-list>]
     );
   }
 }

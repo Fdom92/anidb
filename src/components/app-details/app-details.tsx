@@ -3,7 +3,7 @@ import { animeDetails } from '../../helpers/graphql.queries';
 
 @Component({
   tag: 'app-details',
-  styleUrl: 'app-details.scss'
+  styleUrl: 'app-details.css'
 })
 export class AppDetails {
 
@@ -50,26 +50,23 @@ export class AppDetails {
   }
 
   render() {
-    return (
-      <ion-page class='show-page'>
-        <ion-header md-height='56px'>
-          <ion-toolbar>
-            <ion-buttons slot='start'>
-              <ion-back-button defaultHref='/'/>
-            </ion-buttons>
-            <ion-title>AniDB</ion-title>
-          </ion-toolbar>
-        </ion-header>
-
-        <ion-content>
-          <div>
-            {this.anime
-            ? this.anime
-            : <p></p>
-            }
-          </div>
-        </ion-content>
-      </ion-page>
-    );
+    return [
+      <ion-header>
+      <ion-toolbar color='primary'>
+        <ion-buttons slot='start'>
+          <ion-back-button defaultHref='/'/>
+        </ion-buttons>
+        <ion-title>AniDB</ion-title>
+      </ion-toolbar>
+    </ion-header>,
+    <ion-content>
+      <div>
+        {this.anime
+        ? this.anime
+        : <p></p>
+        }
+      </div>
+    </ion-content>
+    ];
   }
 }

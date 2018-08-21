@@ -3,7 +3,7 @@ import { Component, Element, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'lazy-avatar',
-  styleUrl: 'lazy-avatar.scss',
+  styleUrl: 'lazy-avatar.css',
   shadow: true
 })
 export class LazyAvatar {

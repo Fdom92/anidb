@@ -3,7 +3,7 @@ import { Component, Prop, Element } from '@stencil/core';
 
 @Component({
   tag: 'anime-trailer',
-  styleUrl: 'anime-trailer.scss'
+  styleUrl: 'anime-trailer.css'
 })
 export class AnimeTrailer {
 
@@ -38,13 +38,12 @@ export class AnimeTrailer {
 
   render() {
     return (
-      <div>
-        {this.trailer !== null &&
-        (<div class="anime-trailer">
+        this.trailer !== null &&
+        <div class="anime-trailer">
           <div onClick={() => { this.closeBackground() }} id="background">
           </div>
           <div id="youtube-video" onClick={() => { this.closeBackground() }}>
-            <lazy-iframe src={"https://www.youtube.com/embed/" + this.trailer.id} title="Ionic team at Polymer Summit video" />
+            <lazy-iframe src={"https://www.youtube.com/embed/" + this.trailer.id} text="Anime Trailer" />
           </div>
           <div onClick={() => { this.openYoutube() }} id="launch-video">
             <span>See the trailer</span>
@@ -52,8 +51,7 @@ export class AnimeTrailer {
           <a href={"https://youtu.be/" + this.trailer.id} rel="noopener" id="mobile-video">
             <span>See the trailer</span>
           </a>
-        </div>)}
-      </div>
+        </div>
     );
   }
 }

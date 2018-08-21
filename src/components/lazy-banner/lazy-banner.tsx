@@ -3,7 +3,7 @@ import { Component, Element, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'lazy-banner',
-  styleUrl: 'lazy-banner.scss',
+  styleUrl: 'lazy-banner.css',
   shadow: true
 })
 export class LazyBanner {

@@ -1,13 +1,15 @@
 import { Component, State, Listen, Prop } from '@stencil/core';
 import { animeList } from '../../helpers/graphql.queries';
-import { AlertController } from '@ionic/core';
 import { presentAlert } from '../../helpers/utils';
 
 @Component({
   tag: 'app-home',
-  styleUrl: 'app-home.scss'
+  styleUrl: 'app-home.css'
 })
 export class AppHome {
+
+  @Prop({ connect: 'ion-alert-controller' })
+  alertCtrl: HTMLIonAlertControllerElement;
 
   @State() animes   = [];
   @State() pageInfo: any;
@@ -18,8 +20,6 @@ export class AppHome {
     page: 0,
     perPage: 0
   };
-
-  @Prop({ connect: 'ion-alert-controller' }) alertCtrl: AlertController;
 
   @Listen('ionInput')
   ionInputHandler(event) {
@@ -113,20 +113,18 @@ export class AppHome {
   }
 
   render() {
-    return (
-      <ion-page class='show-page'>
+    return [
         <ion-header md-height='56px'>
-          <ion-toolbar>
+          <ion-toolbar color="primary">
             <ion-title>AniDB</ion-title>
           </ion-toolbar>
-          <ion-toolbar>
+          <ion-toolbar color="primary">
             <form onSubmit={(e) => this.goSearch(e)}>
               <ion-searchbar></ion-searchbar>
               <input class="submit-button" type="submit" value="Submit"/>
             </form>
           </ion-toolbar>
-        </ion-header>
-
+        </ion-header>,
         <ion-content>
           {this.animes.length !== 0
             ?
@@ -142,7 +140,6 @@ export class AppHome {
             <ion-infinite-scroll-content></ion-infinite-scroll-content>
           </ion-infinite-scroll>
         </ion-content>
-      </ion-page>
-    );
+    ];
   }
 }

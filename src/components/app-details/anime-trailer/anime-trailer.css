@@ -1,0 +1,72 @@
+anime-trailer .anime-trailer {
+  margin-bottom: 5px;
+}
+anime-trailer .anime-trailer span {
+  color: black;
+  text-decoration: underline;
+}
+anime-trailer #youtube-video {
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.36, 0.66, 0.04, 1);
+  position: absolute;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  width: 100%;
+}
+anime-trailer #youtube-video iframe {
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15), 0px 20px 40px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+anime-trailer .youtube-show {
+  opacity: 1 !important;
+  transform: translatey(-30px) !important;
+ /*scale(3)*/
+  pointer-events: auto !important;
+}
+anime-trailer #background {
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 8888;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  background-color: #00082d;
+  transition: opacity 0.3s cubic-bezier(0.36, 0.66, 0.04, 1);
+}
+anime-trailer .background-show {
+  opacity: 0.4 !important;
+  pointer-events: auto !important;
+}
+anime-trailer #launch-video, anime-trailer #mobile-video {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+anime-trailer #launch-video:hover, anime-trailer #mobile-video:hover {
+  opacity: 0.7;
+}
+anime-trailer #launch-video span, anime-trailer #mobile-video span {
+  transition: all 0.15s ease;
+}
+anime-trailer #mobile-video {
+  display: none;
+}
+@media screen and (max-width: 740px) {
+  anime-trailer #launch-video {
+    display: none;
+ }
+  anime-trailer #youtube-video {
+    display: none;
+ }
+  anime-trailer #mobile-video {
+    display: flex;
+ }
+}

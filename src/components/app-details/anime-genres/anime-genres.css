@@ -1,0 +1,13 @@
+anime-genres h2 {
+  font-size: 24px;
+}
+
+:host ion-chip {
+  margin-right: 2px;
+}
+
+@media screen and (max-width: 740px) {
+  anime-genres h2 {
+    font-size: 18px;
+ }
+}

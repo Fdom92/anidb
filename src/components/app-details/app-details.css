@@ -1,0 +1,7 @@
+:host ion-toolbar ion-buttons ion-back-button button ion-icon {
+  font-size: 24px;
+  color: white;
+}
+:host ion-content ion-card strong {
+  padding-right: 5px;
+}

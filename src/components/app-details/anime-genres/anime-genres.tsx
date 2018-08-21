@@ -3,7 +3,7 @@ import { Component, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'anime-genres',
-  styleUrl: 'anime-genres.scss'
+  styleUrl: 'anime-genres.css'
 })
 export class AnimeGenres {
 
@@ -13,17 +13,15 @@ export class AnimeGenres {
 
   componentDidLoad() {
     this.data = this.genres.map(genre =>
-      <ion-chip>
+      <ion-chip color='primary'>
         <ion-label>{genre}</ion-label>
       </ion-chip>)
   }
 
   render() {
-    return (
-      <div>
-      <h2>Genres</h2>
-      {this.data}
-      </div>
-    );
+    return [
+      <h2>Genres</h2>,
+      this.data
+    ];
   }
 }

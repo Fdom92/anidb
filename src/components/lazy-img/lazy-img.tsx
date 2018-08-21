@@ -3,7 +3,7 @@ import { Component, Element, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'lazy-img',
-  styleUrl: 'lazy-img.scss',
+  styleUrl: 'lazy-img.css',
   shadow: true
 })
 export class LazyImg {

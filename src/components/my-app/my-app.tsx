@@ -1,30 +1,24 @@
-import '@stencil/router';
 import '@ionic/core';
 import { Component, Prop, Listen } from '@stencil/core';
-import { ToastController } from '@ionic/core';
 
 @Component({
   tag: 'my-app',
-  styleUrl: 'my-app.scss'
+  styleUrl: 'my-app.css'
 })
 export class MyApp {
 
-  @Prop({ connect: 'ion-toast-controller' }) toastCtrl: ToastController;
+  @Prop({ connect: 'ion-toast-controller' })
+  toastCtrl: HTMLIonToastControllerElement;
 
-  componentDidLoad() {
-    window.addEventListener('swUpdate', () => {
-      this.toastCtrl.create({
-        message: 'New version available',
-        showCloseButton: true,
-        closeButtonText: 'Reload'
-      }).then((toast) => {
-        toast.present();
-      });
-    })
-  }
-
-  @Listen('body:ionToastWillDismiss')
-  reload() {
+  @Listen('window:swUpdate')
+  async onSWUpdate() {
+    const toast = await this.toastCtrl.create({
+      message: 'New version available',
+      showCloseButton: true,
+      closeButtonText: 'Reload'
+    });
+    await toast.present();
+    await toast.onWillDismiss();
     window.location.reload();
   }
 
@@ -35,7 +29,7 @@ export class MyApp {
           <ion-route url='/' component='app-home'></ion-route>
           <ion-route url='/details/:id' component='app-details'></ion-route>
         </ion-router>
-        <ion-nav swipeBackEnabled={false} main></ion-nav>
+        <ion-nav />
       </ion-app>
     );
   }
