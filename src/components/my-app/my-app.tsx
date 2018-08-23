@@ -2,8 +2,7 @@ import '@ionic/core';
 import { Component, Prop, Listen } from '@stencil/core';
 
 @Component({
-  tag: 'my-app',
-  styleUrl: 'my-app.css'
+  tag: 'my-app'
 })
 export class MyApp {
 

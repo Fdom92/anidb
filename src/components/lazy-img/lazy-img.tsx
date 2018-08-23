@@ -1,6 +1,5 @@
 import { Component, Element, Prop, State } from '@stencil/core';
 
-
 @Component({
   tag: 'lazy-img',
   styleUrl: 'lazy-img.css',

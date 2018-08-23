@@ -60,9 +60,8 @@ export class AnimeCharacters {
 
     const element = document.createElement('div');
     element.innerHTML = `
-    <ion-page class='show-page character-modal'>
       <ion-header md-height='56px'>
-        <ion-toolbar>
+        <ion-toolbar color='primary'>
           <ion-title>Character</ion-title>
           <ion-buttons slot='end'>
             <ion-button class="dismiss">
@@ -88,11 +87,11 @@ export class AnimeCharacters {
         <h1>Voice actors</h1>
         ${voiceActors}
       </ion-content>
-    </ion-page>
     `;
 
     const modalElement = await this.modalCtrl.create({
-      component: element
+      component: element,
+      cssClass: 'character-modal'
     });
     const button = element.querySelector('ion-button');
     button.addEventListener('click', () => {

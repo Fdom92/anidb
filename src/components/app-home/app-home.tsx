@@ -3,8 +3,7 @@ import { animeList } from '../../helpers/graphql.queries';
 import { presentAlert } from '../../helpers/utils';
 
 @Component({
-  tag: 'app-home',
-  styleUrl: 'app-home.css'
+  tag: 'app-home'
 })
 export class AppHome {
 
@@ -23,7 +22,7 @@ export class AppHome {
 
   @Listen('ionInput')
   ionInputHandler(event) {
-    if (event.detail.target) {
+    if (event && event.detail && event.detail.target) {
       this.searchQuery = event.detail.target.value;
     }
   }
@@ -121,7 +120,9 @@ export class AppHome {
           <ion-toolbar color="primary">
             <form onSubmit={(e) => this.goSearch(e)}>
               <ion-searchbar></ion-searchbar>
-              <input class="submit-button" type="submit" value="Submit"/>
+              {/* <ion-button fill="clear" type="submit" color="dark">
+              Submit
+              </ion-button> */}
             </form>
           </ion-toolbar>
         </ion-header>,

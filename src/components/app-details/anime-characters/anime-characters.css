@@ -12,20 +12,7 @@ anime-characters ion-item .item .item-inner p {
     font-size: 18px;
  }
 }
-.character-modal ion-toolbar .toolbar-background {
-  background-color: #eaa000;
-}
-.character-modal ion-toolbar .toolbar-content ion-title .toolbar-title {
-  color: white;
-}
-.character-modal ion-toolbar ion-buttons button .button-text {
-  font-size: 36px;
-  color: white;
-  line-height: 1px;
-}
-.character-modal ion-content ion-scroll .scroll-inner {
-  padding: 15px;
-}
+
 .character-modal ion-content .content-top {
   display: flex;
   flex-direction: row;

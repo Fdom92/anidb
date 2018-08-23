@@ -13,7 +13,7 @@ export class AnimeGenres {
 
   componentDidLoad() {
     this.data = this.genres.map(genre =>
-      <ion-chip color='primary'>
+      <ion-chip margin-end color='primary'>
         <ion-label>{genre}</ion-label>
       </ion-chip>)
   }

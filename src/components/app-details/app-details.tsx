@@ -2,8 +2,7 @@ import { Component, Prop, State, Element } from '@stencil/core';
 import { animeDetails } from '../../helpers/graphql.queries';
 
 @Component({
-  tag: 'app-details',
-  styleUrl: 'app-details.css'
+  tag: 'app-details'
 })
 export class AppDetails {
 
