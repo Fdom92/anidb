@@ -10,15 +10,20 @@ export class AppHome {
   @Prop({ connect: 'ion-alert-controller' })
   alertCtrl: HTMLIonAlertControllerElement;
 
-  @State() animes   = [];
+  @State() animes = [];
   @State() pageInfo: any;
+
   @State() searchQuery = 'a';
-  @State() loadingItems = [];
   @State() setup = {
     search: '',
     page: 0,
     perPage: 0
   };
+
+  @State() loading = true;
+  @State() showInfiniteScroll = true;
+  @State() loadingItems = [];
+
 
   @Listen('ionInput')
   ionInputHandler(event) {
@@ -39,22 +44,20 @@ export class AppHome {
       infiniteScroll.complete();
     } else {
       // No more animes to load
+      this.showInfiniteScroll = false;
       presentAlert(this.alertCtrl, 'Oops!', 'There aren\'t more results.');
       infiniteScroll.complete();
     }
   }
 
-  componentWillLoad() {
-    // Skeleton items while loading
-    for (let i = 0; i < 10; i++) {
-      this.loadingItems.push(
-        <ion-item>
-          <ion-avatar slot="start">
-          </ion-avatar>
-          <ion-skeleton-text></ion-skeleton-text>
-        </ion-item>
-      );
-    }
+  componentDidLoad() {
+    // Skeleton items for loading state
+    this.loadingItems = Array.from({ length: 10 }, () =>
+      <ion-item>
+        <ion-avatar slot="start">
+        </ion-avatar>
+        <ion-skeleton-text></ion-skeleton-text>
+      </ion-item>);
     // Default search query
     var variables = {
       search: this.searchQuery,
@@ -63,6 +66,7 @@ export class AppHome {
     };
     // Save default setup and load animes
     this.setup = variables;
+    this.loading = true;
     this.getAnimes(variables);
   }
 
@@ -78,6 +82,7 @@ export class AppHome {
       // Clean up the animes, save the new setup and load animes
       this.animes = [];
       this.setup = variables;
+      this.loading = true;
       this.getAnimes(variables);
     }
   }
@@ -86,26 +91,28 @@ export class AppHome {
     var query = animeList;
 
     var url = 'https://graphql.anilist.co',
-        options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify({
-            query: query,
-            variables: variables
-          })
-        };
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          query: query,
+          variables: variables
+        })
+      };
 
     const response = await fetch(url, options);
-    const data = await response.json();
+    const { data } = await response.json();
 
-    if (data.data.Page.media.length !== 0) {
-      data.data.Page.media.map(element => {
+    this.loading = false;
+
+    if (data.Page.media.length !== 0) {
+      data.Page.media.map(element => {
         this.animes.push(<home-item anime={element}></home-item>);
       });
-      this.pageInfo = data.data.Page.pageInfo;
+      this.pageInfo = data.Page.pageInfo;
     } else {
       presentAlert(this.alertCtrl, 'Oops!', 'Didn\'t find results for that search, try again.');
     }
@@ -113,34 +120,33 @@ export class AppHome {
 
   render() {
     return [
-        <ion-header md-height='56px'>
-          <ion-toolbar color="primary">
-            <ion-title>AniDB</ion-title>
-          </ion-toolbar>
-          <ion-toolbar color="primary">
-            <form onSubmit={(e) => this.goSearch(e)}>
-              <ion-searchbar></ion-searchbar>
-              {/* <ion-button fill="clear" type="submit" color="dark">
-              Submit
-              </ion-button> */}
-            </form>
-          </ion-toolbar>
-        </ion-header>,
-        <ion-content>
-          {this.animes.length !== 0
-            ?
-            (<ion-list>
-                {this.animes}
-            </ion-list>)
-            :
-            (<ion-list>
+      <ion-header md-height='56px'>
+        <ion-toolbar color="primary">
+          <ion-title>AniDB</ion-title>
+        </ion-toolbar>
+        <ion-toolbar color="primary">
+          <form onSubmit={(e) => this.goSearch(e)}>
+            <ion-searchbar></ion-searchbar>
+          </form>
+        </ion-toolbar>
+      </ion-header>,
+      <ion-content>
+        {
+          this.loading ?
+            <ion-list>
               {this.loadingItems}
-            </ion-list>)
-          }
-          <ion-infinite-scroll id="infinite-scroll">
-            <ion-infinite-scroll-content></ion-infinite-scroll-content>
-          </ion-infinite-scroll>
-        </ion-content>
+            </ion-list>
+            :
+            <ion-list>
+              {this.animes}
+            </ion-list>
+        }
+        <ion-infinite-scroll
+          id="infinite-scroll"
+          disabled={!this.showInfiniteScroll}>
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-content>
     ];
   }
 }

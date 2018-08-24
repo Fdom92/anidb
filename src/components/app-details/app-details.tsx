@@ -37,9 +37,9 @@ export class AppDetails {
         };
 
     const response = await fetch(url, options);
-    const data = await response.json();
+    const { data } = await response.json();
 
-    const animeData = data.data.Media;
+    const animeData = data.Media;
     this.anime = <anime-details anime={animeData}></anime-details>;
   }
 
@@ -60,10 +60,7 @@ export class AppDetails {
     </ion-header>,
     <ion-content>
       <div>
-        {this.anime
-        ? this.anime
-        : <p></p>
-        }
+        {this.anime}
       </div>
     </ion-content>
     ];
