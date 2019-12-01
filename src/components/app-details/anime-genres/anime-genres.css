@@ -1,9 +1,15 @@
 anime-genres h2 {
   font-size: 24px;
+  color: var(--ion-item-text);
 }
 
 @media screen and (max-width: 740px) {
   anime-genres h2 {
     font-size: 18px;
  }
+}
+
+anime-genres ion-chip {
+  color: var(--ion-chip-text);
+  background: var(--ion-chip-background);
 }

@@ -34,3 +34,7 @@ anime-details .anime-details-content .anime-description {
     font-size: 16px;
  }
 }
+
+anime-details h2 {
+  color: var(--ion-item-text);
+}

@@ -1,0 +1,5 @@
+home-item ion-item {
+    color: var(--ion-item-text);
+    --background: var(--ion-item-background);
+    --border-color: var(--ion-item-border);
+}

@@ -38,3 +38,11 @@ anime-characters ion-item .item .item-inner p {
     font-size: 16px;
  }
 }
+
+.character-modal ion-content {
+  --background: var(--ion-item-background);
+}
+
+.character-modal h1, p {
+  color: var(--ion-item-text);
+}

@@ -1,9 +1,10 @@
-import { Component, State, Listen, Prop } from '@stencil/core';
+import { Component, State, Listen, Prop, h } from '@stencil/core';
 import { animeList } from '../../helpers/graphql.queries';
 import { presentAlert } from '../../helpers/utils';
 
 @Component({
-  tag: 'app-home'
+  tag: 'app-home',
+  styleUrl: 'app-home.css'
 })
 export class AppHome {
 
@@ -122,6 +123,9 @@ export class AppHome {
     return [
       <ion-header md-height='56px'>
         <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+          </ion-buttons>
           <ion-title>AniDB</ion-title>
         </ion-toolbar>
         <ion-toolbar color="primary">

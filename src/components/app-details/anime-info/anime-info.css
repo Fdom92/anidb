@@ -1,7 +1,6 @@
 anime-info .anime-info-section {
   display: flex;
   flex-direction: column;
-  max-width: 200px;
 }
 anime-info .anime-info-section .anime-info-row .left-section {
   font-size: 18px;
@@ -18,4 +17,8 @@ anime-info .anime-info-section .anime-info-row .right-section {
   anime-info .anime-info-section .anime-info-row .right-section {
     font-size: 16px;
  }
+}
+
+anime-info h1,p {
+  color: var(--ion-item-text);
 }

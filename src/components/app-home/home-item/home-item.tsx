@@ -1,7 +1,8 @@
-import { Component, Prop, Element } from '@stencil/core';
+import { Component, Prop, Element, h } from '@stencil/core';
 
 @Component({
-  tag: 'home-item'
+  tag: 'home-item',
+  styleUrl: 'home-item.css'
 })
 export class HomeItem {
 

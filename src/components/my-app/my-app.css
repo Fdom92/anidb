@@ -1,0 +1,9 @@
+my-app ion-menu ion-content {
+    --background: var(--ion-item-background);
+}
+
+my-app ion-menu ion-content ion-item {
+    color: var(--ion-item-text);
+    --background: var(--ion-item-background);
+    --border-color: var(--ion-item-border);
+}

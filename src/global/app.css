@@ -1,8 +1,18 @@
-/** Basic CSS for Ionic Apps */
+/* Document Level Styles */
+
+/*
+  The imports below are needed to include our light dom css for global styles such as fonts and colors.
+  You can comment out any of these imports if you do not need that css. For example, if you have your own
+  global font family css then you can comment out the typography.css import.
+*/
+
+/** Core CSS required for ionic components to work property */
+@import "~@ionic/core/css/core.css";
+
+/** Basic CSS for apps built with Ionic */
 @import "~@ionic/core/css/normalize.css";
 @import "~@ionic/core/css/structure.css";
 @import "~@ionic/core/css/typography.css";
-@import "~@ionic/core/css/colors.css";
 
 /** Optional CSS utils that can be commented out */
 @import "~@ionic/core/css/padding.css";
@@ -16,8 +26,9 @@
   For more info on CSS variables check out:
   https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
   More info about color theming using Ionic:
-  https://beta.ionicframework.com/docs/theming/color-generator
+  https://ionicframework.com/docs/theming/color-generator
 */
+
 :root {
 
   /** primary **/
@@ -27,4 +38,11 @@
   --ion-color-primary-contrast-rgb: 0,0,0;
   --ion-color-primary-shade: #ce8d00;
   --ion-color-primary-tint: #ecaa1a;
+
+  --ion-item-text: #000000;
+  --ion-item-toggle: #eaa000;
+  --ion-item-border: lightgray;
+  --ion-item-background: #FFFFFF;
+  --ion-chip-text: #ce8d00;
+  --ion-chip-background: #fff7e6;
 }

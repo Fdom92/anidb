@@ -1,16 +1,19 @@
-import { Component, Prop, State, Element } from '@stencil/core';
+import { Component, Prop, State, Element, h } from '@stencil/core';
 import { animeDetails } from '../../helpers/graphql.queries';
 
 @Component({
-  tag: 'app-details'
+  tag: 'app-details',
+  styleUrl: 'app-details.css'
 })
 export class AppDetails {
 
   @Element() el: Element;
 
   @State() anime: any;
+  @State() animeData: any;
+  @State() isFav: boolean;
   // Getting the id as prop from the ion nav
-  @Prop() id: string;
+  @Prop() animeId: string;
 
   componentWillLoad() {
     this.loadDetails();
@@ -20,49 +23,99 @@ export class AppDetails {
     var query = animeDetails;
 
     var variables = {
-      id: this.id
+      id: this.animeId
     };
 
     var url = 'https://graphql.anilist.co',
-        options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify({
-            query: query,
-            variables: variables
-          })
-        };
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          query: query,
+          variables: variables
+        })
+      };
 
     const response = await fetch(url, options);
     const { data } = await response.json();
 
     const animeData = data.Media;
+    this.animeData = animeData;
     this.anime = <anime-details anime={animeData}></anime-details>;
   }
 
-  goBack() {
-    // Nav back to previous page
-    this.el.closest('ion-nav').pop();
+  addFav() {
+    this.isFav = true;
+    const currentFavs = localStorage.getItem('AniDB_Favorites');
+    if (currentFavs) {
+      const favItems: any[] = JSON.parse(currentFavs).list;
+      localStorage.setItem('AniDB_Favorites', JSON.stringify({
+        list: [
+          ...favItems,
+          {
+            id: this.animeData.id,
+            avatar: this.animeData.coverImage.medium,
+            title: this.animeData.title.romaji
+          }
+        ]
+      }));
+    } else {
+      localStorage.setItem('AniDB_Favorites', JSON.stringify({
+        list: [
+          {
+            id: this.animeData.id,
+            avatar: this.animeData.coverImage.medium,
+            title: this.animeData.title.romaji
+          }
+        ]
+      }));
+    }
+  }
+
+  removeFav() {
+    this.isFav = false;
+    const currentFavs = localStorage.getItem('AniDB_Favorites');
+    if (currentFavs) {
+      const favItems: any[] = JSON.parse(currentFavs).list;
+      localStorage.removeItem('AniDB_Favorites');
+      const filteredList = favItems.filter(favItem => favItem.id !== this.animeData.id);      
+      if (filteredList.length === 0) {
+        localStorage.setItem('AniDB_Favorites', JSON.stringify({ list: [] }));
+      } else {
+        localStorage.setItem('AniDB_Favorites', JSON.stringify({ list: [...filteredList] }));
+      }
+    }
   }
 
   render() {
     return [
       <ion-header>
-      <ion-toolbar color='primary'>
-        <ion-buttons slot='start'>
-          <ion-back-button defaultHref='/'/>
-        </ion-buttons>
-        <ion-title>AniDB</ion-title>
-      </ion-toolbar>
-    </ion-header>,
-    <ion-content>
-      <div>
-        {this.anime}
-      </div>
-    </ion-content>
+        <ion-toolbar color='primary'>
+          <ion-buttons slot='start'>
+            <ion-back-button defaultHref='/' />
+          </ion-buttons>
+          <ion-title>AniDB</ion-title>
+          <ion-buttons slot='end'>
+            {
+              this.isFav ?
+                (<ion-button onClick={() => this.removeFav()}>
+                  <ion-icon name="heart"></ion-icon>
+                </ion-button>) :
+                (<ion-button onClick={() => this.addFav()}>
+                  <ion-icon name="heart-empty"></ion-icon>
+                </ion-button>)
+            }
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>,
+      <ion-content>
+        <div>
+          {this.anime}
+        </div>
+      </ion-content>
     ];
   }
 }

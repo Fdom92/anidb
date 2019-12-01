@@ -2,7 +2,7 @@ anime-trailer .anime-trailer {
   margin-bottom: 5px;
 }
 anime-trailer .anime-trailer span {
-  color: black;
+  color: var(--ion-item-text);
   text-decoration: underline;
 }
 anime-trailer #youtube-video {
