@@ -1,5 +1,5 @@
-import '@ionic/core';
-import { Component, Prop, Listen, h } from '@stencil/core';
+import { toastController } from '@ionic/core';
+import { Component, Listen, h } from '@stencil/core';
 import { setDarkMode, setDefaultMode } from '../../helpers/utils';
 
 @Component({
@@ -8,12 +8,9 @@ import { setDarkMode, setDefaultMode } from '../../helpers/utils';
 })
 export class MyApp {
 
-  @Prop({ connect: 'ion-toast-controller' })
-  toastCtrl: HTMLIonToastControllerElement;
-
   @Listen('swUpdate', { target: 'window' })
   async onSWUpdate() {
-    const toast = await this.toastCtrl.create({
+    const toast = await toastController.create({
       message: 'New version available',
       showCloseButton: true,
       closeButtonText: 'Reload'
