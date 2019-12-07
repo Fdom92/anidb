@@ -14,7 +14,7 @@ export class AnimeInfo {
 
   @Prop() anime: any;
 
-  componentDidLoad() {
+  componentWillLoad() {
     this.format = this.anime.format;
     this.status = this.anime.status;
     this.type = this.anime.type;

@@ -6,7 +6,7 @@ import { Component, h, State } from '@stencil/core';
 })
 export class AppFavorites {
 
-    @State() favItems: any;
+    @State() favItems: any = [];
 
     componentWillLoad() {
         const favorites = localStorage.getItem('AniDB_Favorites');

@@ -1,5 +1,5 @@
 import { Component, Prop, State, h } from '@stencil/core';
-
+import { modalController } from '@ionic/core';
 
 @Component({
   tag: 'anime-characters',
@@ -10,17 +10,15 @@ export class AnimeCharacters {
   @State() characters: any;
 
   @Prop() anime: any;
-  @Prop({ connect: 'ion-modal-controller' })
-  modalCtrl: HTMLIonModalControllerElement;
 
-  componentDidLoad() {
+  componentWillLoad() {
     this.characters = this.anime.characters.edges.map(edge => {
       return <ion-item onClick={() => this.showModal(edge)}>
-                <ion-avatar slot="start">
-                  <lazy-avatar src={edge.node.image.medium} alt="anime avatar"/>
-                </ion-avatar>
-                <p>{edge.node.name.first} {edge.node.name.last}</p>
-              </ion-item>
+        <ion-avatar slot="start">
+          <lazy-avatar src={edge.node.image.medium} alt="anime avatar" />
+        </ion-avatar>
+        <p>{edge.node.name.first} {edge.node.name.last}</p>
+      </ion-item>
     });
   }
 
@@ -39,7 +37,7 @@ export class AnimeCharacters {
     let voiceActors;
     if (edge.voiceActors.length > 0) {
       voiceActors = edge.voiceActors.map(ele => {
-        return  `<ion-item>
+        return `<ion-item>
                   <p>${ele.name.first} ${ele.name.last}</p>
                 </ion-item>`
       }).join('');
@@ -89,7 +87,7 @@ export class AnimeCharacters {
       </ion-content>
     `;
 
-    const modalElement = await this.modalCtrl.create({
+    const modalElement = await modalController.create({
       component: element,
       cssClass: 'character-modal'
     });
@@ -103,10 +101,10 @@ export class AnimeCharacters {
   render() {
     return (
       this.anime.characters.edges.length > 1 &&
-        [<h2>Characters</h2>,
-        <ion-list>
-          {this.characters}
-        </ion-list>]
+      [<h2>Characters</h2>,
+      <ion-list>
+        {this.characters}
+      </ion-list>]
     );
   }
 }

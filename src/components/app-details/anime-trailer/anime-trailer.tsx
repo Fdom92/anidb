@@ -11,7 +11,7 @@ export class AnimeTrailer {
 
   @Prop() trailer: any;
 
-  componentDidLoad() {
+  componentWillLoad() {
     if ((document as any).documentMode || /Edge/.test(navigator.userAgent)) {
       (this.el.querySelector('#youtube-video') as HTMLElement).style.display = 'none';
       (this.el.querySelector('#launch-video') as HTMLElement).style.display = 'none';

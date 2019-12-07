@@ -1,4 +1,5 @@
-import { Component, State, Listen, Prop, h } from '@stencil/core';
+import { loadingController, alertController } from '@ionic/core';
+import { Component, h, Listen, State } from '@stencil/core';
 import { animeList } from '../../helpers/graphql.queries';
 import { presentAlert } from '../../helpers/utils';
 
@@ -7,9 +8,6 @@ import { presentAlert } from '../../helpers/utils';
   styleUrl: 'app-home.css'
 })
 export class AppHome {
-
-  @Prop({ connect: 'ion-alert-controller' })
-  alertCtrl: HTMLIonAlertControllerElement;
 
   @State() animes = [];
   @State() pageInfo: any;
@@ -21,10 +19,7 @@ export class AppHome {
     perPage: 0
   };
 
-  @State() loading = true;
   @State() showInfiniteScroll = true;
-  @State() loadingItems = [];
-
 
   @Listen('ionInput')
   ionInputHandler(event) {
@@ -46,19 +41,12 @@ export class AppHome {
     } else {
       // No more animes to load
       this.showInfiniteScroll = false;
-      presentAlert(this.alertCtrl, 'Oops!', 'There aren\'t more results.');
+      presentAlert(alertController, 'Oops!', 'There aren\'t more results.');
       infiniteScroll.complete();
     }
   }
 
-  componentDidLoad() {
-    // Skeleton items for loading state
-    this.loadingItems = Array.from({ length: 10 }, () =>
-      <ion-item>
-        <ion-avatar slot="start">
-        </ion-avatar>
-        <ion-skeleton-text></ion-skeleton-text>
-      </ion-item>);
+  componentWillLoad() {
     // Default search query
     var variables = {
       search: this.searchQuery,
@@ -67,8 +55,7 @@ export class AppHome {
     };
     // Save default setup and load animes
     this.setup = variables;
-    this.loading = true;
-    this.getAnimes(variables);
+    this.getAnimes(variables, true);
   }
 
   goSearch(e) {
@@ -83,14 +70,12 @@ export class AppHome {
       // Clean up the animes, save the new setup and load animes
       this.animes = [];
       this.setup = variables;
-      this.loading = true;
-      this.getAnimes(variables);
+      this.getAnimes(variables, true);
     }
   }
 
-  async getAnimes(variables) {
+  async getAnimes(variables, showLoading = false) {
     var query = animeList;
-
     var url = 'https://graphql.anilist.co',
       options = {
         method: 'POST',
@@ -103,11 +88,19 @@ export class AppHome {
           variables: variables
         })
       };
+    var loading: HTMLIonLoadingElement;
 
+    if (showLoading) {
+      loading = await loadingController.create({
+        message: 'Loading Animes...'
+      });
+      loading.present();
+    }
     const response = await fetch(url, options);
     const { data } = await response.json();
-
-    this.loading = false;
+    if (showLoading) {
+      loading.dismiss();
+    }
 
     if (data.Page.media.length !== 0) {
       data.Page.media.map(element => {
@@ -115,7 +108,7 @@ export class AppHome {
       });
       this.pageInfo = data.Page.pageInfo;
     } else {
-      presentAlert(this.alertCtrl, 'Oops!', 'Didn\'t find results for that search, try again.');
+      presentAlert(alertController, 'Oops!', 'Didn\'t find results for that search, try again.');
     }
   }
 
@@ -124,7 +117,7 @@ export class AppHome {
       <ion-header md-height='56px'>
         <ion-toolbar color="primary">
           <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+            <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title>AniDB</ion-title>
         </ion-toolbar>
@@ -135,16 +128,9 @@ export class AppHome {
         </ion-toolbar>
       </ion-header>,
       <ion-content>
-        {
-          this.loading ?
-            <ion-list>
-              {this.loadingItems}
-            </ion-list>
-            :
-            <ion-list>
-              {this.animes}
-            </ion-list>
-        }
+        <ion-list>
+          {this.animes}
+        </ion-list>
         <ion-infinite-scroll
           id="infinite-scroll"
           disabled={!this.showInfiniteScroll}>

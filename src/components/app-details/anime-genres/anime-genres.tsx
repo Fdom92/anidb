@@ -11,7 +11,7 @@ export class AnimeGenres {
 
   @Prop() genres: any;
 
-  componentDidLoad() {
+  componentWillLoad() {
     this.data = this.genres.map(genre =>
       <ion-chip margin-end color='primary'>
         <ion-label>{genre}</ion-label>

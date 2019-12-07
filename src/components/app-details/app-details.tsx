@@ -1,4 +1,5 @@
-import { Component, Prop, State, Element, h } from '@stencil/core';
+import { loadingController } from '@ionic/core';
+import { Component, Element, h, Prop, State } from '@stencil/core';
 import { animeDetails } from '../../helpers/graphql.queries';
 
 @Component({
@@ -39,12 +40,29 @@ export class AppDetails {
         })
       };
 
+    const loading: HTMLIonLoadingElement = await loadingController.create({
+      message: 'Loading Details...'
+    });
+    loading.present();
     const response = await fetch(url, options);
     const { data } = await response.json();
+    loading.dismiss();
 
     const animeData = data.Media;
     this.animeData = animeData;
+    this.checkFav();
     this.anime = <anime-details anime={animeData}></anime-details>;
+  }
+
+  checkFav() {
+    const currentFavs = localStorage.getItem('AniDB_Favorites');
+    const favItems: any[] = JSON.parse(currentFavs).list;
+    const filteredList = favItems.filter(favItem => favItem.id === this.animeData.id);
+    if (filteredList.length === 0) {
+      this.isFav = false;
+    } else {
+      this.isFav = true;
+    }
   }
 
   addFav() {
@@ -81,7 +99,7 @@ export class AppDetails {
     if (currentFavs) {
       const favItems: any[] = JSON.parse(currentFavs).list;
       localStorage.removeItem('AniDB_Favorites');
-      const filteredList = favItems.filter(favItem => favItem.id !== this.animeData.id);      
+      const filteredList = favItems.filter(favItem => favItem.id !== this.animeData.id);
       if (filteredList.length === 0) {
         localStorage.setItem('AniDB_Favorites', JSON.stringify({ list: [] }));
       } else {
