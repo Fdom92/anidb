@@ -1,10 +1,9 @@
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Element, Prop, State, h } from "@stencil/core";
 
 @Component({
-  tag: 'lazy-iframe'
+  tag: "lazy-iframe"
 })
 export class LazyIframe {
-
   @Prop() src: string;
   @Prop() text: string;
 
@@ -15,7 +14,7 @@ export class LazyIframe {
   io: IntersectionObserver;
 
   componentDidLoad() {
-    if ('IntersectionObserver' in window) {
+    if ("IntersectionObserver" in window) {
       this.io = new IntersectionObserver((data: any[]) => {
         if (data[0].isIntersecting) {
           this.handleIframe();
@@ -23,7 +22,7 @@ export class LazyIframe {
         }
       });
 
-      this.io.observe(this.el.querySelector('iframe'));
+      this.io.observe(this.el.querySelector("iframe"));
     } else {
       this.handleIframe();
     }
@@ -34,7 +33,7 @@ export class LazyIframe {
   }
 
   handleIframe() {
-    this.realSrc = this.src
+    this.realSrc = this.src;
   }
 
   cleanup() {
@@ -47,7 +46,14 @@ export class LazyIframe {
   render() {
     return (
       <div>
-        <iframe frameBorder="0" title={this.text} allowFullScreen={true} width="700" height="450" src={this.realSrc} ></iframe>
+        <iframe
+          frameBorder="0"
+          title={this.text}
+          allowFullScreen={true}
+          width="700"
+          height="450"
+          src={this.realSrc}
+        ></iframe>
       </div>
     );
   }

@@ -6,7 +6,7 @@ anime-genres h2 {
 @media screen and (max-width: 740px) {
   anime-genres h2 {
     font-size: 18px;
- }
+  }
 }
 
 anime-genres ion-chip {

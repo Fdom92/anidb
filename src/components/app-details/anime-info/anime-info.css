@@ -13,12 +13,13 @@ anime-info .anime-info-section .anime-info-row .right-section {
 @media screen and (max-width: 740px) {
   anime-info .anime-info-section .anime-info-row .left-section {
     font-size: 16px;
- }
+  }
   anime-info .anime-info-section .anime-info-row .right-section {
     font-size: 16px;
- }
+  }
 }
 
-anime-info h1,p {
+anime-info h1,
+p {
   color: var(--ion-item-text);
 }

@@ -1,9 +1,20 @@
 app-favorites ion-content {
-    --background: var(--ion-item-background);
+  --background: var(--ion-item-background);
 }
 
 app-favorites ion-content ion-item {
-    color: var(--ion-item-text);
-    --background: var(--ion-item-background);
-    --border-color: var(--ion-item-border);
+  color: var(--ion-item-text);
+  --background: var(--ion-item-background);
+  --border-color: var(--ion-item-border);
+}
+
+app-favorites ion-content ion-item.no-items {
+  --border-style: none;
+  --padding-start: 0;
+}
+
+app-favorites ion-content ion-item.no-items p {
+  text-align: center;
+  width: 80%;
+  margin: auto;
 }

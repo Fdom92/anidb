@@ -1,12 +1,11 @@
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Element, Prop, State, h } from "@stencil/core";
 
 @Component({
-  tag: 'lazy-avatar',
-  styleUrl: 'lazy-avatar.css',
+  tag: "lazy-avatar",
+  styleUrl: "lazy-avatar.css",
   shadow: true
 })
 export class LazyAvatar {
-
   @Element() el: HTMLElement;
 
   @Prop() src: string;
@@ -27,14 +26,14 @@ export class LazyAvatar {
   }
 
   handleImage() {
-    const image: HTMLImageElement = this.el.shadowRoot.querySelector('img');
-    image.setAttribute('src', image.getAttribute('data-src'));
+    const image: HTMLImageElement = this.el.shadowRoot.querySelector("img");
+    image.setAttribute("src", image.getAttribute("data-src"));
     image.onerror = () => {
-      image.setAttribute('src', '../assets/default.png');
-      image.removeAttribute('data-src');
+      image.setAttribute("src", "../assets/default.png");
+      image.removeAttribute("data-src");
     };
     image.onload = () => {
-      image.removeAttribute('data-src');
+      image.removeAttribute("data-src");
     };
   }
 
@@ -42,15 +41,15 @@ export class LazyAvatar {
     if (!this.src) {
       return;
     }
-    if ('IntersectionObserver' in window) {
+    if ("IntersectionObserver" in window) {
       this.io = new IntersectionObserver((data: any) => {
         if (data[0].isIntersecting) {
           this.handleImage();
           this.removeIntersectionObserver();
         }
-      })
+      });
 
-      this.io.observe(this.el.shadowRoot.querySelector('img'));
+      this.io.observe(this.el.shadowRoot.querySelector("img"));
     } else {
       this.handleImage();
     }
@@ -64,8 +63,6 @@ export class LazyAvatar {
   }
 
   render() {
-    return (
-      <img data-src={this.src} alt={this.alt}></img>
-    );
+    return <img data-src={this.src} alt={this.alt}></img>;
   }
 }

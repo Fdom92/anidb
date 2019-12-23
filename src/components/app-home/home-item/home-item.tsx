@@ -1,11 +1,10 @@
-import { Component, Prop, Element, h } from '@stencil/core';
+import { Component, Prop, Element, h } from "@stencil/core";
 
 @Component({
-  tag: 'home-item',
-  styleUrl: 'home-item.css'
+  tag: "home-item",
+  styleUrl: "home-item.css"
 })
 export class HomeItem {
-
   @Element() el: Element;
 
   @Prop() anime: any;
@@ -13,10 +12,10 @@ export class HomeItem {
   render() {
     return (
       <ion-item href={`/details/${this.anime.id}`}>
-          <ion-avatar slot="start">
-            <lazy-avatar src={this.anime.coverImage.medium} alt="anime avatar"/>
-          </ion-avatar>
-          <p class="home-item-text">{this.anime.title.romaji}</p>
+        <ion-avatar slot="start">
+          <lazy-avatar src={this.anime.coverImage.medium} alt="anime avatar" />
+        </ion-avatar>
+        <p class="home-item-text">{this.anime.title.romaji}</p>
       </ion-item>
     );
   }

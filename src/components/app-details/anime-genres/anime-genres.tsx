@@ -1,27 +1,23 @@
-import { Component, Prop, State, h } from '@stencil/core';
-
+import { Component, Prop, State, h } from "@stencil/core";
 
 @Component({
-  tag: 'anime-genres',
-  styleUrl: 'anime-genres.css'
+  tag: "anime-genres",
+  styleUrl: "anime-genres.css"
 })
 export class AnimeGenres {
-
   @State() data: any;
 
   @Prop() genres: any;
 
   componentWillLoad() {
-    this.data = this.genres.map(genre =>
-      <ion-chip margin-end color='primary'>
+    this.data = this.genres.map(genre => (
+      <ion-chip margin-end color="primary">
         <ion-label>{genre}</ion-label>
-      </ion-chip>)
+      </ion-chip>
+    ));
   }
 
   render() {
-    return [
-      <h2>Genres</h2>,
-      this.data
-    ];
+    return [<h2>Genres</h2>, this.data];
   }
 }

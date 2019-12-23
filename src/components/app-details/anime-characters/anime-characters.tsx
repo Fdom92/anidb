@@ -1,33 +1,34 @@
-import { Component, Prop, State, h } from '@stencil/core';
-import { modalController } from '@ionic/core';
+import { Component, Prop, State, h } from "@stencil/core";
+import { modalController } from "@ionic/core";
 
 @Component({
-  tag: 'anime-characters',
-  styleUrl: 'anime-characters.css'
+  tag: "anime-characters",
+  styleUrl: "anime-characters.css"
 })
 export class AnimeCharacters {
-
   @State() characters: any;
 
   @Prop() anime: any;
 
   componentWillLoad() {
     this.characters = this.anime.characters.edges.map(edge => {
-      return <ion-item onClick={() => this.showModal(edge)}>
-        <ion-avatar slot="start">
-          <lazy-avatar src={edge.node.image.medium} alt="anime avatar" />
-        </ion-avatar>
-        <p>{edge.node.name.first} {edge.node.name.last}</p>
-      </ion-item>
+      return (
+        <ion-item onClick={() => this.showModal(edge)}>
+          <ion-avatar slot="start">
+            <lazy-avatar src={edge.node.image.medium} alt="anime avatar" />
+          </ion-avatar>
+          <p>
+            {edge.node.name.first} {edge.node.name.last}
+          </p>
+        </ion-item>
+      );
     });
   }
 
   async showModal(edge) {
-    console.log(edge);
-
     let title;
     if (edge.node.name.first && edge.node.name.last) {
-      title = edge.node.name.first + ' ' + edge.node.name.last;
+      title = edge.node.name.first + " " + edge.node.name.last;
     } else if (edge.node.name.first && !edge.node.name.last) {
       title = edge.node.name.first;
     } else {
@@ -36,11 +37,13 @@ export class AnimeCharacters {
 
     let voiceActors;
     if (edge.voiceActors.length > 0) {
-      voiceActors = edge.voiceActors.map(ele => {
-        return `<ion-item>
+      voiceActors = edge.voiceActors
+        .map(ele => {
+          return `<ion-item>
                   <p>${ele.name.first} ${ele.name.last}</p>
-                </ion-item>`
-      }).join('');
+                </ion-item>`;
+        })
+        .join("");
       voiceActors = `
         <ion-list>
           ${voiceActors}
@@ -51,12 +54,12 @@ export class AnimeCharacters {
 
     let description;
     if (edge.node.description !== "") {
-      description = edge.node.description.replace(/__/g, '');
+      description = edge.node.description.replace(/__/g, "");
     } else {
-      description = "Description not found"
+      description = "Description not found";
     }
 
-    const element = document.createElement('div');
+    const element = document.createElement("div");
     element.innerHTML = `
       <ion-header md-height='56px'>
         <ion-toolbar color='primary'>
@@ -89,10 +92,10 @@ export class AnimeCharacters {
 
     const modalElement = await modalController.create({
       component: element,
-      cssClass: 'character-modal'
+      cssClass: "character-modal"
     });
-    const button = element.querySelector('ion-button');
-    button.addEventListener('click', () => {
+    const button = element.querySelector("ion-button");
+    button.addEventListener("click", () => {
       modalElement.dismiss();
     });
     modalElement.present();
@@ -100,11 +103,10 @@ export class AnimeCharacters {
 
   render() {
     return (
-      this.anime.characters.edges.length > 1 &&
-      [<h2>Characters</h2>,
-      <ion-list>
-        {this.characters}
-      </ion-list>]
+      this.anime.characters.edges.length > 1 && [
+        <h2>Characters</h2>,
+        <ion-list>{this.characters}</ion-list>
+      ]
     );
   }
 }

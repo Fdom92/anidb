@@ -1,9 +1,9 @@
 app-details ion-content {
-    --background: var(--ion-item-background);
+  --background: var(--ion-item-background);
 }
 
 app-details ion-content ion-item {
-    color: var(--ion-item-text);
-    --background: var(--ion-item-background);
-    --border-color: var(--ion-item-border);
+  color: var(--ion-item-text);
+  --background: var(--ion-item-background);
+  --border-color: var(--ion-item-border);
 }

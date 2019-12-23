@@ -6,7 +6,10 @@ anime-details .anime-details-content .anime-details-content-top {
   flex-direction: row;
   width: 100%;
 }
-anime-details .anime-details-content .anime-details-content-top .anime-details-content-top-information {
+anime-details
+  .anime-details-content
+  .anime-details-content-top
+  .anime-details-content-top-information {
   width: 100%;
   font-size: 16px;
   padding-left: 25px;
@@ -18,21 +21,21 @@ anime-details .anime-details-content .anime-description {
   anime-details .anime-details-content-top-information h1 {
     font-size: 18px;
     margin-top: 0;
- }
+  }
   anime-details .anime-details-content-top-information p {
     font-size: 14px;
     margin-top: 1px;
     margin-bottom: 5px;
- }
+  }
   anime-details .anime-description {
     line-height: 1.3em;
- }
+  }
   anime-details .anime-description h2 {
     font-size: 18px;
- }
+  }
   anime-details .anime-description p {
     font-size: 16px;
- }
+  }
 }
 
 anime-details h2 {

@@ -1,15 +1,16 @@
-import { Component, Prop, Element, State, h } from '@stencil/core';
-
+import { Component, Prop, Element, State, h } from "@stencil/core";
 
 @Component({
-  tag: 'anime-details',
-  styleUrl: 'anime-details.css'
+  tag: "anime-details",
+  styleUrl: "anime-details.css"
 })
 export class AnimeDetails {
-
   @Element() el: Element;
 
-  @State() isDevice: boolean = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  @State()
+  isDevice: boolean = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
 
   @Prop() anime: any;
 
@@ -22,22 +23,23 @@ export class AnimeDetails {
   render() {
     return (
       <div>
-        {
-          this.anime.bannerImage !== null &&
-            <lazy-banner src={this.anime.bannerImage} alt="Anime banner image"/>
-        }
+        {this.anime.bannerImage !== null && (
+          <lazy-banner src={this.anime.bannerImage} alt="Anime banner image" />
+        )}
         <div class="anime-details-content">
           <div class="anime-details-content-top">
-            {
-              this.isDevice === true ? (
-                <div class="cover-section">
-                  <lazy-img src={this.anime.coverImage.medium} alt="Cover image"/>
-                </div>
-              ) : (
-                <div class="cover-section">
-                  <lazy-img src={this.anime.coverImage.large} alt="Cover image"/>
-                </div>)
-            }
+            {this.isDevice === true ? (
+              <div class="cover-section">
+                <lazy-img
+                  src={this.anime.coverImage.medium}
+                  alt="Cover image"
+                />
+              </div>
+            ) : (
+              <div class="cover-section">
+                <lazy-img src={this.anime.coverImage.large} alt="Cover image" />
+              </div>
+            )}
             <div class="anime-details-content-top-information">
               <anime-info anime={this.anime}></anime-info>
               <anime-trailer trailer={this.anime.trailer}></anime-trailer>
@@ -46,7 +48,7 @@ export class AnimeDetails {
           <anime-genres genres={this.anime.genres}></anime-genres>
           <div class="anime-description">
             <h2>Description</h2>
-            <p> { this.cleanHtml(this.anime.description) } </p>
+            <p> {this.cleanHtml(this.anime.description)} </p>
           </div>
           <anime-characters anime={this.anime}></anime-characters>
         </div>

@@ -1,36 +1,35 @@
-import { loadingController, alertController } from '@ionic/core';
-import { Component, h, Listen, State } from '@stencil/core';
-import { animeList } from '../../helpers/graphql.queries';
-import { presentAlert } from '../../helpers/utils';
+import { loadingController, alertController } from "@ionic/core";
+import { Component, h, Listen, State } from "@stencil/core";
+import { animeList } from "../../helpers/graphql.queries";
+import { presentAlert } from "../../helpers/utils";
 
 @Component({
-  tag: 'app-home',
-  styleUrl: 'app-home.css'
+  tag: "app-home",
+  styleUrl: "app-home.css"
 })
 export class AppHome {
-
   @State() animes = [];
   @State() pageInfo: any;
 
-  @State() searchQuery = 'a';
+  @State() searchQuery = "a";
   @State() setup = {
-    search: '',
+    search: "",
     page: 0,
     perPage: 0
   };
 
   @State() showInfiniteScroll = true;
 
-  @Listen('ionInput')
+  @Listen("ionInput")
   ionInputHandler(event) {
     if (event && event.detail && event.detail.target) {
       this.searchQuery = event.detail.target.value;
     }
   }
 
-  @Listen('ionInfinite')
+  @Listen("ionInfinite")
   ionInfiniteHandler() {
-    const infiniteScroll: any = document.getElementById('infinite-scroll');
+    const infiniteScroll: any = document.getElementById("infinite-scroll");
     // If there are more animes to load
     if (this.pageInfo.hasNextPage) {
       // Get the actual setup and load the next page
@@ -41,7 +40,7 @@ export class AppHome {
     } else {
       // No more animes to load
       this.showInfiniteScroll = false;
-      presentAlert(alertController, 'Oops!', 'There aren\'t more results.');
+      presentAlert(alertController, "Oops!", "There aren't more results.");
       infiniteScroll.complete();
     }
   }
@@ -76,12 +75,12 @@ export class AppHome {
 
   async getAnimes(variables, showLoading = false) {
     var query = animeList;
-    var url = 'https://graphql.anilist.co',
+    var url = "https://graphql.anilist.co",
       options = {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json"
         },
         body: JSON.stringify({
           query: query,
@@ -92,7 +91,7 @@ export class AppHome {
 
     if (showLoading) {
       loading = await loadingController.create({
-        message: 'Loading Animes...'
+        message: "Loading Animes..."
       });
       loading.present();
     }
@@ -108,13 +107,17 @@ export class AppHome {
       });
       this.pageInfo = data.Page.pageInfo;
     } else {
-      presentAlert(alertController, 'Oops!', 'Didn\'t find results for that search, try again.');
+      presentAlert(
+        alertController,
+        "Oops!",
+        "Didn't find results for that search, try again."
+      );
     }
   }
 
   render() {
     return [
-      <ion-header md-height='56px'>
+      <ion-header md-height="56px">
         <ion-toolbar color="primary">
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
@@ -122,18 +125,17 @@ export class AppHome {
           <ion-title>AniDB</ion-title>
         </ion-toolbar>
         <ion-toolbar color="primary">
-          <form onSubmit={(e) => this.goSearch(e)}>
+          <form onSubmit={e => this.goSearch(e)}>
             <ion-searchbar></ion-searchbar>
           </form>
         </ion-toolbar>
       </ion-header>,
       <ion-content>
-        <ion-list>
-          {this.animes}
-        </ion-list>
+        <ion-list>{this.animes}</ion-list>
         <ion-infinite-scroll
           id="infinite-scroll"
-          disabled={!this.showInfiniteScroll}>
+          disabled={!this.showInfiniteScroll}
+        >
           <ion-infinite-scroll-content></ion-infinite-scroll-content>
         </ion-infinite-scroll>
       </ion-content>

@@ -7,10 +7,10 @@ anime-characters ion-item .item .item-inner p {
 @media screen and (max-width: 740px) {
   anime-characters h2 {
     font-size: 18px;
- }
+  }
   anime-characters ion-item .item .item-inner p {
     font-size: 18px;
- }
+  }
 }
 
 .character-modal ion-content .content-top {
@@ -32,17 +32,18 @@ anime-characters ion-item .item .item-inner p {
 @media screen and (max-width: 740px) {
   .character-modal h1 {
     font-size: 18px;
- }
+  }
   .character-modal p {
     margin: 0;
     font-size: 16px;
- }
+  }
 }
 
 .character-modal ion-content {
   --background: var(--ion-item-background);
 }
 
-.character-modal h1, p {
+.character-modal h1,
+p {
   color: var(--ion-item-text);
 }
