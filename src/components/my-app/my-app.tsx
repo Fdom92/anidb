@@ -1,6 +1,5 @@
 import { toastController } from '@ionic/core';
 import { Component, Listen, h } from '@stencil/core';
-import { setDarkMode, setDefaultMode } from '../../helpers/utils';
 
 @Component({
   tag: 'my-app',
@@ -18,19 +17,6 @@ export class MyApp {
     await toast.present();
     await toast.onWillDismiss();
     window.location.reload();
-  }
-
-  componentWillLoad() {
-    const settings = localStorage.getItem('AniDB_Settings');
-    let isDarkThemeChecked = false;
-    if (settings) {
-      isDarkThemeChecked = JSON.parse(settings).darkTheme;
-    }
-    if (isDarkThemeChecked) {
-      setDarkMode();
-    } else {
-      setDefaultMode();
-    }
   }
 
   render() {
@@ -56,9 +42,6 @@ export class MyApp {
                 </ion-menu-toggle>
                 <ion-menu-toggle>
                   <ion-item href={'/favorites'}>Favorites</ion-item>
-                </ion-menu-toggle>
-                <ion-menu-toggle>
-                  <ion-item href={'/settings'}>Settings</ion-item>
                 </ion-menu-toggle>
               </ion-list>
             </ion-content>

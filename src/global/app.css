@@ -30,19 +30,59 @@
 */
 
 :root {
-
   /** primary **/
   --ion-color-primary: #eaa000;
-  --ion-color-primary-rgb: 234,160,0;
+  --ion-color-primary-rgb: 234, 160, 0;
   --ion-color-primary-contrast: #000000;
-  --ion-color-primary-contrast-rgb: 0,0,0;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
   --ion-color-primary-shade: #ce8d00;
   --ion-color-primary-tint: #ecaa1a;
 
   --ion-item-text: #000000;
   --ion-item-toggle: #eaa000;
   --ion-item-border: lightgray;
-  --ion-item-background: #FFFFFF;
+  --ion-item-background: #ffffff;
   --ion-chip-text: #ce8d00;
   --ion-chip-background: #fff7e6;
+}
+
+/* Dark mode preferences */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /** primary **/
+    --ion-color-primary: #222428;
+    --ion-color-primary-rgb: 34, 36, 40;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #1e2023;
+    --ion-color-primary-tint: #383a3e;
+
+    --ion-item-text: #ffffff;
+    --ion-item-toggle: #ffffff;
+    --ion-item-border: #525760;
+    --ion-item-background: #3b3e45;
+    --ion-chip-text: white;
+    --ion-chip-background: #222428;
+  }
+}
+
+body.dark-theme {
+  /** primary **/
+  --ion-color-primary: #222428;
+  --ion-color-primary-rgb: 34, 36, 40;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1e2023;
+  --ion-color-primary-tint: #383a3e;
+
+  --ion-item-text: #ffffff;
+  --ion-item-toggle: #ffffff;
+  --ion-item-border: #525760;
+  --ion-item-background: #3b3e45;
+  --ion-chip-text: white;
+  --ion-chip-background: #222428;
+}
+
+ion-toast {
+  --button-color: var(--ion-item-text);
 }
