@@ -1,5 +1,5 @@
 import { toastController } from "@ionic/core";
-import { Component, Listen, h } from "@stencil/core";
+import { Component, h, Listen } from "@stencil/core";
 
 @Component({
   tag: "my-app",
@@ -29,6 +29,7 @@ export class MyApp {
             url="/details/:animeId"
             component="app-details"
           ></ion-route>
+          <ion-route component="app-home" />
         </ion-router>
         <ion-split-pane content-id="menu-content">
           <ion-menu content-id="menu-content">
