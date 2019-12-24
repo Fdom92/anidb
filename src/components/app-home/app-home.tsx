@@ -115,6 +115,10 @@ export class AppHome {
     }
   }
 
+  openFilters() {
+
+  }
+
   render() {
     return [
       <ion-header md-height="56px">
@@ -123,6 +127,11 @@ export class AppHome {
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title>AniDB</ion-title>
+          <ion-buttons onClick={() => this.openFilters()} slot="end">
+            <ion-button>
+            <ion-icon name="ios-funnel"></ion-icon>
+            </ion-button>
+          </ion-buttons>
         </ion-toolbar>
         <ion-toolbar color="primary">
           <form onSubmit={e => this.goSearch(e)}>
