@@ -1,7 +1,8 @@
-import { loadingController, alertController } from "@ionic/core";
+import { loadingController, alertController, modalController } from "@ionic/core";
 import { Component, h, Listen, State } from "@stencil/core";
-import { animeList } from "../../helpers/graphql.queries";
+import { animeList, animeFilteredList } from "../../helpers/graphql.queries";
 import { presentAlert } from "../../helpers/utils";
+import { FilterModal } from "./filter-modal/filter-modal";
 
 @Component({
   tag: "app-home",
@@ -35,7 +36,7 @@ export class AppHome {
       // Get the actual setup and load the next page
       let variables = this.setup;
       this.setup.page = this.setup.page + 1;
-      this.getAnimes(variables);
+      this.getAnimes(variables, animeList);
       infiniteScroll.complete();
     } else {
       // No more animes to load
@@ -54,7 +55,7 @@ export class AppHome {
     };
     // Save default setup and load animes
     this.setup = variables;
-    this.getAnimes(variables, true);
+    this.getAnimes(variables, animeList, true);
   }
 
   goSearch(e) {
@@ -69,12 +70,11 @@ export class AppHome {
       // Clean up the animes, save the new setup and load animes
       this.animes = [];
       this.setup = variables;
-      this.getAnimes(variables, true);
+      this.getAnimes(variables, animeList, true);
     }
   }
 
-  async getAnimes(variables, showLoading = false) {
-    var query = animeList;
+  async getAnimes(variables, query, showLoading = false) {
     var url = "https://graphql.anilist.co",
       options = {
         method: "POST",
@@ -115,8 +115,24 @@ export class AppHome {
     }
   }
 
-  openFilters() {
+  async openFilters() {
+    const modalElement = await modalController.create({
+      component: FilterModal,
+      cssClass: "character-modal"
+    });
 
+    modalElement.onDidDismiss().then(() => {
+      var variables = {
+        format: "TV",
+        season: "SPRING",
+        seasonYear: 2019,
+        status: "FINISHED"
+      };
+      // Clean up the animes, save the new setup and load animes
+      this.animes = [];
+      this.getAnimes(variables, animeFilteredList, true);
+    });
+    modalElement.present();
   }
 
   render() {

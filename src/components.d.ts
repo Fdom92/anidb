@@ -30,6 +30,7 @@ export namespace Components {
   }
   interface AppFavorites {}
   interface AppHome {}
+  interface FilterModal {}
   interface HomeItem {
     'anime': any;
   }
@@ -103,6 +104,12 @@ declare global {
     new (): HTMLAppHomeElement;
   };
 
+  interface HTMLFilterModalElement extends Components.FilterModal, HTMLStencilElement {}
+  var HTMLFilterModalElement: {
+    prototype: HTMLFilterModalElement;
+    new (): HTMLFilterModalElement;
+  };
+
   interface HTMLHomeItemElement extends Components.HomeItem, HTMLStencilElement {}
   var HTMLHomeItemElement: {
     prototype: HTMLHomeItemElement;
@@ -147,6 +154,7 @@ declare global {
     'app-details': HTMLAppDetailsElement;
     'app-favorites': HTMLAppFavoritesElement;
     'app-home': HTMLAppHomeElement;
+    'filter-modal': HTMLFilterModalElement;
     'home-item': HTMLHomeItemElement;
     'lazy-avatar': HTMLLazyAvatarElement;
     'lazy-banner': HTMLLazyBannerElement;
@@ -177,6 +185,7 @@ declare namespace LocalJSX {
   }
   interface AppFavorites {}
   interface AppHome {}
+  interface FilterModal {}
   interface HomeItem {
     'anime'?: any;
   }
@@ -207,6 +216,7 @@ declare namespace LocalJSX {
     'app-details': AppDetails;
     'app-favorites': AppFavorites;
     'app-home': AppHome;
+    'filter-modal': FilterModal;
     'home-item': HomeItem;
     'lazy-avatar': LazyAvatar;
     'lazy-banner': LazyBanner;
@@ -230,6 +240,7 @@ declare module "@stencil/core" {
       'app-details': LocalJSX.AppDetails & JSXBase.HTMLAttributes<HTMLAppDetailsElement>;
       'app-favorites': LocalJSX.AppFavorites & JSXBase.HTMLAttributes<HTMLAppFavoritesElement>;
       'app-home': LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
+      'filter-modal': LocalJSX.FilterModal & JSXBase.HTMLAttributes<HTMLFilterModalElement>;
       'home-item': LocalJSX.HomeItem & JSXBase.HTMLAttributes<HTMLHomeItemElement>;
       'lazy-avatar': LocalJSX.LazyAvatar & JSXBase.HTMLAttributes<HTMLLazyAvatarElement>;
       'lazy-banner': LocalJSX.LazyBanner & JSXBase.HTMLAttributes<HTMLLazyBannerElement>;
